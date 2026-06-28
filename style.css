@@ -1,0 +1,131 @@
+/* ===== 全局重置 & 基础 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #2d3436;
+    line-height: 1.8;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* ===== 主卡片容器 ===== */
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 50px 60px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== 头部 ===== */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #74b9ff, #a29bfe);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: white;
+    box-shadow: 0 8px 25px rgba(116, 185, 255, 0.3);
+}
+
+h1 {
+    font-size: 28px;
+    color: #2d3436;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-size: 15px;
+    color: #636e72;
+}
+
+/* ===== 分隔线 ===== */
+.divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #dfe6e9, transparent);
+    margin: 30px 0;
+}
+
+/* ===== 章节标题 ===== */
+h2 {
+    font-size: 20px;
+    color: #0984e3;
+    margin-bottom: 14px;
+    padding-bottom: 6px;
+    border-bottom: 3px solid #74b9ff;
+    display: inline-block;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+/* ===== 段落 ===== */
+p {
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+/* ===== 列表 ===== */
+ul {
+    margin: 10px 0 20px 20px;
+}
+
+li {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+/* ===== 链接 ===== */
+a {
+    color: #0984e3;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #6c5ce7;
+    text-decoration: underline;
+}
+
+/* ===== 页脚 ===== */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #dfe6e9;
+    font-size: 13px;
+    color: #b2bec3;
+}
+
+/* ===== 教育时间线 ===== */
+.edu-item {
+    display: flex;
+    margin-bottom: 14px;
+    padding-left: 12px;
+    border-left: 3px solid #74b9ff;
+}
+
+.edu-year {
+    min-width: 130px;
+    font-size: 14px;
+    color: #636e72;
+}

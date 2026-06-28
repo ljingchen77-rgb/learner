@@ -4,47 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>刘靖臣的个人主页</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>你好，我是刘靖臣 👋</h1>
+<div class="container">
 
-    <p>清华大学 · 工程物理系 · 核工程与核技术</p>
+    <header>
+        <div class="avatar">👨‍🔬</div>
+        <h1>刘靖臣</h1>
+        <p class="subtitle">清华大学 · 工程物理系 · 核工程与核技术</p>
+    </header>
 
-    <hr>
+    <hr class="divider">
 
-    <h2>关于我</h2>
-    <p>
-        本科就读于清华大学工程物理系，主修核工程与核技术，
-        研究方向聚焦于托卡马克等离子体的 EUV 辐射诊断。
-    </p>
-    <p>
-        研究生阶段将前往核工业西南物理研究院，
-        继续在磁约束核聚变领域深耕探索。
-    </p>
+    <section>
+        <h2>关于我</h2>
+        <p>
+            本科就读于清华大学工程物理系，主修核工程与核技术，
+            研究方向聚焦于托卡马克等离子体的 EUV 辐射诊断。
+        </p>
+        <p>
+            研究生阶段将前往核工业西南物理研究院，
+            继续在磁约束核聚变领域深耕探索。
+        </p>
+    </section>
 
-    <h2>研究方向</h2>
-    <ul>
-        <li>磁约束核聚变（托卡马克）</li>
-        <li>等离子体 EUV 辐射诊断</li>
-        <li>核工程与核技术</li>
-    </ul>
+    <section>
+        <h2>研究方向</h2>
+        <ul>
+            <li>磁约束核聚变（托卡马克）</li>
+            <li>等离子体 EUV 辐射诊断</li>
+            <li>核工程与核技术</li>
+        </ul>
+    </section>
 
-    <h2>教育背景</h2>
-    <ul>
-        <li><strong>本科</strong> 2022.9 – 2026.6 — 清华大学 · 工程物理系 · 核工程与核技术</li>
-        <li><strong>研究生（即将）</strong> — 核工业西南物理研究院</li>
-    </ul>
+    <section>
+        <h2>教育背景</h2>
+        <div class="edu-item">
+            <span class="edu-year">2022.9 – 2026.6</span>
+            <span class="edu-detail"><strong>本科</strong> — 清华大学 · 工程物理系 · 核工程与核技术</span>
+        </div>
+        <div class="edu-item">
+            <span class="edu-year">即将</span>
+            <span class="edu-detail"><strong>研究生</strong> — 核工业西南物理研究院</span>
+        </div>
+    </section>
 
-    <h2>联系我</h2>
-    <p>
-        <a href="https://github.com">GitHub</a> |
-        <a href="mailto:your-email@example.com">Email</a>
-    </p>
+    <section>
+        <h2>联系我</h2>
+        <p>
+            <a href="https://github.com">GitHub</a> |
+            <a href="mailto:your-email@example.com">Email</a>
+        </p>
+    </section>
 
     <footer>
         <p>&copy; 2026 刘靖臣</p>
     </footer>
+
+</div>
 
 </body>
 </html>
