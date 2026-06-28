@@ -1,9 +1,21 @@
-[
+﻿[
     {
-        "title": "我的第一个个人网站上线了",
-        "date": "2026-06-28",
-        "file": "posts/first-post.md",
-        "categories": ["个人", "教程"],
-        "summary": "从零开始学习用 GitHub Pages 搭建个人网站，记录一下过程。"
+        "title":  "我的第一个个人网站上线了",
+        "date":  "2026-06-28",
+        "file":  "posts/first-post.md",
+        "categories":  [
+                           "个人",
+                           "教程"
+                       ],
+        "summary":  "从零开始学习用 GitHub Pages 搭建个人网站，记录一下过程。"
+    },
+    {
+        "date":  "2026-06-28",
+        "title":  "Test",
+        "categories":  [
+                           "测试"
+                       ],
+        "file":  "posts/test.md",
+        "summary":  "一篇测试文章，验证 Markdown 博客系统正常工作。"
     }
 ]
