@@ -1,0 +1,9 @@
+[
+    {
+        "title": "我的第一个个人网站上线了",
+        "date": "2026-06-28",
+        "file": "posts/first-post.md",
+        "categories": ["个人", "教程"],
+        "summary": "从零开始学习用 GitHub Pages 搭建个人网站，记录一下过程。"
+    }
+]
