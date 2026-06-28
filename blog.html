@@ -6,14 +6,12 @@
     <title>博客 - 刘靖臣</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== 分类标签 ===== */
         .category-filter {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 24px;
         }
-
         .category-tag {
             padding: 4px 14px;
             border-radius: 20px;
@@ -24,60 +22,44 @@
             transition: all 0.2s;
             color: #636e72;
         }
-
         .category-tag:hover {
             border-color: #0984e3;
             color: #0984e3;
         }
-
         .category-tag.active {
             background: #0984e3;
             color: white;
             border-color: #0984e3;
         }
-
         body.dark-mode .category-tag {
             border-color: #2d3748;
             background: #2d3748;
             color: #a0aec0;
         }
-
         body.dark-mode .category-tag.active {
             background: #0984e3;
             color: white;
         }
-
-        /* ===== 文章条目 ===== */
         .post-item {
             margin-bottom: 24px;
             padding-bottom: 20px;
             border-bottom: 1px solid #dfe6e9;
         }
-
         body.dark-mode .post-item {
             border-bottom-color: #2d3748;
         }
-
-        .post-item h3 {
-            margin-bottom: 4px;
-        }
-
-        .post-item h3 a {
-            font-size: 17px;
-        }
-
+        .post-item h3 { margin-bottom: 4px; }
+        .post-item h3 a { font-size: 17px; }
         .post-meta {
             font-size: 13px;
             color: #636e72;
             margin-bottom: 8px;
         }
-
         .post-categories {
             display: inline-flex;
             gap: 6px;
             margin-left: 8px;
         }
-
         .post-categories span {
             font-size: 11px;
             padding: 1px 8px;
@@ -85,45 +67,17 @@
             background: #e8f4fd;
             color: #0984e3;
         }
-
         body.dark-mode .post-categories span {
             background: #1e3a5f;
             color: #74b9ff;
         }
-
-        .post-summary {
-            font-size: 14px;
-            color: #555;
-        }
-
-        body.dark-mode .post-summary {
-            color: #a0aec0;
-        }
-
-        /* ===== 文章阅读视图 ===== */
-        #post-content {
-            display: none;
-        }
-
-        #post-content.active {
-            display: block;
-        }
-
-        #post-list.active {
-            display: block;
-        }
-
-        #post-list.hidden {
-            display: none;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        /* ===== Markdown 渲染样式 ===== */
+        .post-summary { font-size: 14px; color: #555; }
+        body.dark-mode .post-summary { color: #a0aec0; }
+        #post-content { display: none; }
+        #post-content.active { display: block; }
+        #post-list.active { display: block; }
+        #post-list.hidden { display: none; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 14px; }
         #post-content h1 { font-size: 24px; margin: 20px 0 10px; }
         #post-content h2 { font-size: 20px; margin: 18px 0 8px; display: block; border-bottom: none; color: #2d3436; }
         #post-content h3 { font-size: 17px; margin: 14px 0 6px; }
@@ -144,10 +98,7 @@
             overflow-x: auto;
             margin: 12px 0;
         }
-        #post-content pre code {
-            background: transparent;
-            padding: 0;
-        }
+        #post-content pre code { background: transparent; padding: 0; }
         #post-content blockquote {
             border-left: 4px solid #0984e3;
             padding-left: 14px;
@@ -162,10 +113,17 @@
         }
         #post-content strong { font-weight: 600; }
         #post-content em { font-style: italic; }
-
         body.dark-mode #post-content h2 { color: #e0e0e0; }
         body.dark-mode #post-content code { background: #2d3748; color: #e0e0e0; }
         body.dark-mode #post-content blockquote { color: #a0aec0; }
+        .comments-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #dfe6e9;
+        }
+        body.dark-mode .comments-section {
+            border-top-color: #2d3748;
+        }
     </style>
 </head>
 <body>
@@ -179,18 +137,18 @@
 
     <hr class="divider">
 
-    <!-- 博客列表视图 -->
     <div id="post-list">
-        <!-- 分类筛选 -->
         <div class="category-filter" id="category-filter"></div>
-        <!-- 文章列表 -->
         <div id="post-items"></div>
     </div>
 
-    <!-- 文章阅读视图 -->
     <div id="post-content">
         <a href="#" class="back-link" id="back-btn">← 返回文章列表</a>
         <div id="post-body"></div>
+        <div class="comments-section">
+            <h2>💬 评论</h2>
+            <div id="comments-container"></div>
+        </div>
     </div>
 
     <footer>
@@ -201,7 +159,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-// ===== 加载文章索引 =====
 let allPosts = [];
 let activeCategory = '全部';
 
@@ -211,20 +168,14 @@ fetch('posts/posts.json')
         allPosts = posts;
         renderCategories();
         renderPosts(posts);
-
-        // 检查 URL 是否有 ?post=xxx
         const params = new URLSearchParams(window.location.search);
         const postFile = params.get('post');
-        if (postFile) {
-            loadPost(postFile);
-        }
+        if (postFile) loadPost(postFile);
     });
 
-// ===== 渲染分类筛选 =====
 function renderCategories() {
     const cats = ['全部', ...new Set(allPosts.flatMap(p => p.categories))];
     const container = document.getElementById('category-filter');
-
     cats.forEach(cat => {
         const tag = document.createElement('span');
         tag.className = 'category-tag' + (cat === '全部' ? ' active' : '');
@@ -234,30 +185,22 @@ function renderCategories() {
     });
 }
 
-// ===== 按分类筛选 =====
 function filterByCategory(cat) {
     activeCategory = cat;
     document.querySelectorAll('.category-tag').forEach(t => {
         t.classList.toggle('active', t.textContent === cat);
     });
-
-    const filtered = cat === '全部'
-        ? allPosts
-        : allPosts.filter(p => p.categories.includes(cat));
-
+    const filtered = cat === '全部' ? allPosts : allPosts.filter(p => p.categories.includes(cat));
     renderPosts(filtered);
 }
 
-// ===== 渲染文章列表 =====
 function renderPosts(posts) {
     const container = document.getElementById('post-items');
     container.innerHTML = '';
-
     if (posts.length === 0) {
         container.innerHTML = '<p style="color: #636e72">该分类下暂无文章 ✍️</p>';
         return;
     }
-
     posts.forEach(post => {
         const item = document.createElement('div');
         item.className = 'post-item';
@@ -275,7 +218,6 @@ function renderPosts(posts) {
     });
 }
 
-// ===== 加载并显示文章 =====
 function loadPost(file) {
     document.getElementById('post-list').classList.add('hidden');
     document.getElementById('post-list').classList.remove('active');
@@ -284,17 +226,13 @@ function loadPost(file) {
     fetch(file)
         .then(r => r.text())
         .then(md => {
-            // 解析文章标题和正文
-            const lines = md.split('\n');
-            const title = lines[0].replace(/^#\s*/, '');
-            const body = marked.parse(md);
-
-            document.getElementById('post-body').innerHTML = body;
+            const title = md.split('\n')[0].replace(/^#\s*/, '');
+            document.getElementById('post-body').innerHTML = marked.parse(md);
             document.title = title + ' - 刘靖臣的博客';
+            loadComments();
         });
 }
 
-// ===== 返回列表 =====
 document.getElementById('back-btn').addEventListener('click', (e) => {
     e.preventDefault();
     document.getElementById('post-content').classList.remove('active');
@@ -302,7 +240,25 @@ document.getElementById('back-btn').addEventListener('click', (e) => {
     document.getElementById('post-list').classList.add('active');
     window.history.pushState({}, '', 'blog.html');
     document.title = '博客 - 刘靖臣';
+    clearComments();
 });
+
+function loadComments() {
+    const container = document.getElementById('comments-container');
+    container.innerHTML = '';
+    const script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'ljingchen77-rgb/learner');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'preferred-color-scheme');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    container.appendChild(script);
+}
+
+function clearComments() {
+    document.getElementById('comments-container').innerHTML = '';
+}
 </script>
 
 </body>
