@@ -1,0 +1,104 @@
+let allPosts = [];
+let activeCategory = '全部';
+const listView = document.getElementById('post-list');
+const contentView = document.getElementById('post-content');
+const itemsContainer = document.getElementById('post-items');
+const filterContainer = document.getElementById('category-filter');
+const bodyContainer = document.getElementById('post-body');
+const commentsContainer = document.getElementById('comments-container');
+const backBtn = document.getElementById('back-btn');
+
+fetch('posts/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+        allPosts = posts;
+        renderCategories();
+        renderPosts(posts);
+        const params = new URLSearchParams(window.location.search);
+        const postFile = params.get('post');
+        if (postFile) loadPost(postFile);
+    });
+
+function renderCategories() {
+    const cats = ['全部', ...new Set(allPosts.flatMap(p => p.categories))];
+    if (cats.length <= 1) { filterContainer.style.display = 'none'; return; }
+    cats.forEach(cat => {
+        const tag = document.createElement('span');
+        tag.className = 'category-tag' + (cat === '全部' ? ' active' : '');
+        tag.textContent = cat;
+        tag.onclick = () => filterByCategory(cat);
+        filterContainer.appendChild(tag);
+    });
+}
+
+function filterByCategory(cat) {
+    activeCategory = cat;
+    document.querySelectorAll('.category-tag').forEach(t => {
+        t.classList.toggle('active', t.textContent === cat);
+    });
+    const filtered = cat === '全部' ? allPosts : allPosts.filter(p => p.categories.includes(cat));
+    renderPosts(filtered);
+}
+
+function renderPosts(posts) {
+    itemsContainer.innerHTML = '';
+    if (posts.length === 0) {
+        itemsContainer.innerHTML = '<p style="color: #999">该分类下暂无文章 ✍️</p>';
+        return;
+    }
+    posts.forEach(post => {
+        const item = document.createElement('div');
+        item.className = 'post-item';
+        item.innerHTML = `
+            <h3><a href="?post=${encodeURIComponent(post.file)}">${post.title}</a></h3>
+            <div class="post-meta">
+                ${post.date}
+                ${post.categories.map(c => `<span class="tag">${c}</span>`).join('')}
+            </div>
+            <p class="post-summary">${post.summary}</p>
+        `;
+        itemsContainer.appendChild(item);
+    });
+}
+
+function loadPost(file) {
+    listView.classList.add('hidden');
+    listView.classList.remove('active');
+    contentView.classList.add('active');
+    window.scrollTo(0, 0);
+
+    fetch(file)
+        .then(r => r.text())
+        .then(md => {
+            const title = md.split('\n')[0].replace(/^#\s*/, '');
+            bodyContainer.innerHTML = marked.parse(md);
+            document.title = title + ' · 刘靖臣';
+            loadComments();
+        });
+}
+
+backBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    contentView.classList.remove('active');
+    listView.classList.remove('hidden');
+    listView.classList.add('active');
+    window.history.pushState({}, '', 'blog.html');
+    document.title = '博客 · 刘靖臣';
+    clearComments();
+});
+
+function loadComments() {
+    commentsContainer.innerHTML = '';
+    const script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'ljingchen77-rgb/learner');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'preferred-color-scheme');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+    commentsContainer.appendChild(script);
+}
+
+function clearComments() {
+    commentsContainer.innerHTML = '';
+}

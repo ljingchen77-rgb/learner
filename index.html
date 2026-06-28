@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>刘靖臣的个人主页</title>
+    <title>刘靖臣 · 主页</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="index.html" class="nav-brand">刘靖臣</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link active">主页</a>
+            <a href="blog.html" class="nav-link">博客</a>
+            <button id="dark-toggle">🌙</button>
+        </div>
+    </div>
+</nav>
 
-    <!-- 暗色模式切换按钮 -->
-    <button id="dark-toggle">🌙</button>
+<div class="container">
 
     <header>
         <div class="avatar">👨‍🔬</div>
         <h1>刘靖臣</h1>
-        <p class="subtitle">清华大学 · 工程物理系</p>
-        <!-- 打字机效果 -->
+        <p class="subtitle">清华大学 · 工程物理系 · 核工程与核技术</p>
         <p id="typewriter"></p>
     </header>
 
@@ -48,23 +55,37 @@
         <h2>教育背景</h2>
         <div class="edu-item">
             <span class="edu-year">2022.9 – 2026.6</span>
-            <span class="edu-detail"><strong>本科</strong> — 清华大学 · 工程物理系 · 核工程与核技术</span>
+            <span><strong>本科</strong> — 清华大学 · 工程物理系 · 核工程与核技术</span>
         </div>
         <div class="edu-item">
             <span class="edu-year">即将</span>
-            <span class="edu-detail"><strong>研究生</strong> — 核工业西南物理研究院</span>
+            <span><strong>研究生</strong> — 核工业西南物理研究院</span>
         </div>
     </section>
 
+    <hr class="divider">
+
     <section>
-        <h2>博客</h2>
-        <p><a href="blog.html">📝 阅读我的文章 →</a></p>
+        <h2>最新文章</h2>
+        <div class="post-item">
+            <h3><a href="blog.html?post=posts/test.md">Test</a></h3>
+            <div class="post-meta">2026-06-28 <span class="tag">测试</span></div>
+            <p class="post-summary">一篇测试文章，验证 Markdown 博客系统正常工作。</p>
+        </div>
+        <div class="post-item">
+            <h3><a href="blog.html?post=posts/first-post.md">我的第一个个人网站上线了</a></h3>
+            <div class="post-meta">2026-06-28 <span class="tag">个人</span><span class="tag">教程</span></div>
+            <p class="post-summary">从零开始学习用 GitHub Pages 搭建个人网站，记录一下过程。</p>
+        </div>
+        <p style="margin-top: 12px; font-size: 14px;"><a href="blog.html">📝 查看全部文章 →</a></p>
     </section>
+
+    <hr class="divider">
 
     <section>
         <h2>联系我</h2>
         <p>
-            <a href="https://github.com/ljingchen77-rgb">GitHub</a> |
+            <a href="https://github.com/ljingchen77-rgb">GitHub</a> ·
             <a href="mailto:jingchen0911@outlook.com">Email</a>
         </p>
     </section>
