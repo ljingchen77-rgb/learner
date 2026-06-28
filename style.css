@@ -1,4 +1,4 @@
-/* ===== 全局重置 & 基础 ===== */
+﻿/* ===== 全局重置 & 基础 ===== */
 * {
     margin: 0;
     padding: 0;
@@ -60,9 +60,10 @@ body.dark-mode .edu-item {
     border-left-color: #74b9ff;
 }
 
-/* ===== 主卡片容器 ===== */
+/* ===== 主卡片容器（带响应式）===== */
 .container {
     max-width: 720px;
+    width: 100%;
     margin: 0 auto;
     background: #ffffff;
     border-radius: 20px;
@@ -70,6 +71,32 @@ body.dark-mode .edu-item {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     position: relative;
     transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* 手机屏幕调整 */
+@media (max-width: 600px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    .container {
+        padding: 30px 20px;
+        border-radius: 14px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .edu-item {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .edu-year {
+        min-width: unset;
+        font-size: 13px;
+    }
 }
 
 /* ===== 暗色模式按钮 ===== */
@@ -99,6 +126,16 @@ body.dark-mode #dark-toggle {
     border-color: #2d3748;
 }
 
+@media (max-width: 600px) {
+    #dark-toggle {
+        top: 14px;
+        right: 14px;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+}
+
 /* ===== 头部 ===== */
 header {
     text-align: center;
@@ -117,6 +154,18 @@ header {
     font-size: 48px;
     color: white;
     box-shadow: 0 8px 25px rgba(116, 185, 255, 0.3);
+}
+
+@media (max-width: 600px) {
+    .avatar {
+        width: 90px;
+        height: 90px;
+        font-size: 36px;
+    }
+
+    header {
+        margin-bottom: 28px;
+    }
 }
 
 h1 {

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客 - 刘靖臣</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>📝 博客</h1>
+        <p class="subtitle"><a href="index.html">← 返回主页</a></p>
+    </header>
+
+    <hr class="divider">
+
+    <section id="post-list">
+        <!-- 博客列表会由 JavaScript 自动生成 -->
+    </section>
+
+    <footer>
+        <p>&copy; 2026 刘靖臣</p>
+    </footer>
+
+</div>
+
+<script>
+// ===== 博客文章数据 =====
+// 你只需要在这里加新文章就行
+const posts = [
+    {
+        title: "我的第一个个人网站上线了",
+        date: "2026-06-28",
+        file: "posts/first-post.html",
+        summary: "从零开始学习用 GitHub Pages 搭建个人网站，记录一下过程。"
+    }
+];
+
+// ===== 渲染博客列表 =====
+const list = document.getElementById('post-list');
+
+if (posts.length === 0) {
+    list.innerHTML = '<p style="color: #636e72">还没有文章，敬请期待 🚀</p>';
+} else {
+    posts.forEach(post => {
+        const article = document.createElement('article');
+        article.style.cssText = `
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #dfe6e9;
+        `;
+
+        article.innerHTML = `
+            <h3 style="margin-bottom: 4px;">
+                <a href="${post.file}">${post.title}</a>
+            </h3>
+            <p style="font-size: 13px; color: #636e72; margin-bottom: 8px;">${post.date}</p>
+            <p style="font-size: 14px; color: #555;">${post.summary}</p>
+        `;
+
+        list.appendChild(article);
+    });
+}
+</script>
+
+</body>
+</html>
