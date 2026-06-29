@@ -44,36 +44,29 @@ function filterByCategory(cat) {
 function renderPosts(posts) {
     itemsContainer.innerHTML = '';
     if (posts.length === 0) {
-        itemsContainer.innerHTML = '<p style="color: #999">该分类下暂无文章 ✍️</p>';
+        itemsContainer.innerHTML = '<p style="color:#999">该分类下暂无文章 \u270d\ufe0f</p>';
         return;
     }
     posts.forEach(post => {
         const item = document.createElement('div');
         item.className = 'post-item';
-        item.innerHTML = `
-            <h3><a href="?post=${encodeURIComponent(post.file)}">${post.title}</a></h3>
-            <div class="post-meta">
-                ${post.date}
-                ${post.categories.map(c => `<span class="tag">${c}</span>`).join('')}
-            </div>
-            <p class="post-summary">${post.summary}</p>
-        `;
+        item.innerHTML = '<h3><a href="?post=' + encodeURIComponent(post.file) + '">' + post.title + '</a></h3>' +
+            '<div class="post-meta">' + post.date + ' ' + post.categories.map(c => '<span class="tag">' + c + '</span>').join('') + '</div>' +
+            '<p class="post-summary">' + post.summary + '</p>';
         itemsContainer.appendChild(item);
     });
 }
 
 function loadPost(file) {
     listView.classList.add('hidden');
-    listView.classList.remove('active');
     contentView.classList.add('active');
     window.scrollTo(0, 0);
-
     fetch(file)
         .then(r => { if (!r.ok) throw new Error('文章加载失败'); return r.text(); })
         .then(md => {
             const title = md.split('\n')[0].replace(/^#\s*/, '');
             bodyContainer.innerHTML = marked.parse(md);
-            document.title = title + ' · 刘靖臣';
+            document.title = title + ' \u00b7 刘靖臣';
             loadComments();
         })
         .catch(err => { bodyContainer.innerHTML = '<p style="color:#e74c3c">\u26a0 ' + err.message + '</p>'; });
@@ -82,27 +75,21 @@ function loadPost(file) {
 function showListView() {
     contentView.classList.remove('active');
     listView.classList.remove('hidden');
-    listView.classList.add('active');
     window.history.pushState({}, '', 'blog.html');
-    document.title = '博客 · 刘靖臣';
+    document.title = '博客 \u00b7 刘靖臣';
     clearComments();
 }
 
-backBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    showListView();
-});
-
-window.addEventListener('popstate', () => {
-    const params = new URLSearchParams(window.location.search);
-    const postFile = params.get('post');
-    if (postFile) loadPost(postFile);
-    else showListView();
+backBtn.addEventListener('click', function(e) { e.preventDefault(); showListView(); });
+window.addEventListener('popstate', function() {
+    var p = new URLSearchParams(window.location.search);
+    var f = p.get('post');
+    if (f) loadPost(f); else showListView();
 });
 
 function loadComments() {
     commentsContainer.innerHTML = '';
-    const script = document.createElement('script');
+    var script = document.createElement('script');
     script.src = 'https://utteranc.es/client.js';
     script.setAttribute('repo', 'ljingchen77-rgb/learner');
     script.setAttribute('issue-term', 'pathname');
@@ -112,6 +99,4 @@ function loadComments() {
     commentsContainer.appendChild(script);
 }
 
-function clearComments() {
-    commentsContainer.innerHTML = '';
-}
+function clearComments() { commentsContainer.innerHTML = ''; }

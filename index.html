@@ -10,7 +10,7 @@
     <meta name="twitter:card" content="summary">
     <link rel="canonical" href="https://ljingchen77-rgb.github.io/learner/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🔬</text></svg>">
-    <title>刘靖臣 · 主页</title>
+    <title>刘靖臣</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,24 +21,21 @@
         <div class="nav-links">
             <a href="index.html" class="nav-link active">主页</a>
             <a href="blog.html" class="nav-link">博客</a>
-            <button id="dark-toggle" aria-label="切换暗色模式">&#x1f319;</button>
+            <button id="dark-toggle" aria-label="切换暗色模式">🌙</button>
         </div>
     </div>
 </nav>
 
-<div class="container">
+<div class="main">
 
-    <header>
-        <div class="avatar">&#x1f468;&#x200d;&#x1f52c;</div>
+    <div class="home-header">
         <h1>刘靖臣</h1>
-        <p class="subtitle">清华大学 · 工程物理系 · 核工程与核技术</p>
-        <p id="typewriter"></p>
-    </header>
-
-    <hr class="divider">
+        <p class="home-subtitle">清华大学 · 工程物理系 · 核工程与核技术</p>
+        <p class="home-tagline" id="home-tagline"></p>
+    </div>
 
     <section>
-        <h2>关于我</h2>
+        <h2>关于</h2>
         <p>
             本科就读于清华大学工程物理系，主修核工程与核技术。
             本科毕业论文围绕托卡马克等离子体辐射问题展开研究。
@@ -50,58 +47,34 @@
     </section>
 
     <section>
-        <h2>研究方向</h2>
-        <ul>
-            <li>磁约束核聚变</li>
-            <li>核工程与核技术</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>教育背景</h2>
+        <h2>教育</h2>
         <div class="edu-item">
             <span class="edu-year">2022.9 – 2026.6</span>
-            <span><strong>本科</strong> — 清华大学 · 工程物理系 · 核工程与核技术</span>
+            <strong>本科</strong> — 清华大学 · 工程物理系 · 核工程与核技术
         </div>
         <div class="edu-item">
             <span class="edu-year">即将</span>
-            <span><strong>研究生</strong> — 核工业西南物理研究院</span>
+            <strong>研究生</strong> — 核工业西南物理研究院
         </div>
     </section>
 
     <hr class="divider">
 
     <section>
-        <h2>本科研究经历</h2>
+        <h2>研究经历</h2>
         <div class="edu-item">
             <span class="edu-year">2025 – 2026</span>
-            <span>
-                <strong>综合论文训练</strong> — 托卡马克等离子体 EUV 辐射的研究<br>
-                <span style="font-size: 14px; color: #999;">
-                    指导老师：谭熠 副教授 · 清华大学工程物理系
-                </span>
-            </span>
+            <strong>综合论文训练</strong> — 托卡马克等离子体 EUV 辐射的研究<br>
+            <span style="font-size: 13px; color: #999;">指导老师：谭熠 副教授</span>
         </div>
-        <p>
-            <strong>研究方法：</strong>基于文献调研与物理建模，建立了从输入功率到总辐射、
-            杂质辐射再到 13.5 nm 带内输出的三层转换效率（CE）分析框架，
-            结合碰撞辐射模型与托卡马克边缘/偏滤器实验数据进行定量评估。
-        </p>
-        <p>
-            <strong>研究内容：</strong>从原子物理、等离子体参数匹配、转换效率、
-            运行稳定性及工程集成四个维度，系统分析了托卡马克作为 EUV 辐射源的可行性。
-            具体包括 Sn/Xe 高 Z 杂质辐射机理与托卡马克参数窗口的匹配性、
-            与工业激光等离子体（LPP）光源在 CE、etendue、时间结构等关键指标上的对比，
-            以及高辐射工况下的能量平衡与 MHD 稳定性约束。
-        </p>
-        <p>
-            <strong>主要结论：</strong>托卡马克等离子体层等效 CE 中值约为 0.5%，
-            较 LPP 光源低约一个数量级，且 etendue 失配显著；
-            引入 Sn/Xe 高 Z 杂质后运行窗口较窄，与 EUV 光学系统在洁净度和
-            重复频率等方面存在工程兼容性挑战。该研究认为，
-            在当前技术条件下托卡马克尚难以替代 LPP 成为工业级 EUV 光刻光源，
-            但作为高 Z 杂质辐射物理的研究平台仍具科学价值。
-        </p>
+        <details class="research-details">
+            <summary>查看详情</summary>
+            <div class="research-body">
+                <p><strong>研究方法：</strong>基于文献调研与物理建模，建立了从输入功率到总辐射、杂质辐射再到 13.5 nm 带内输出的三层转换效率（CE）分析框架，结合碰撞辐射模型与托卡马克边缘/偏滤器实验数据进行定量评估。</p>
+                <p><strong>研究内容：</strong>从原子物理、等离子体参数匹配、转换效率、运行稳定性及工程集成四个维度，系统分析了托卡马克作为 EUV 辐射源的可行性。具体包括 Sn/Xe 高 Z 杂质辐射机理与托卡马克参数窗口的匹配性、与工业激光等离子体（LPP）光源在 CE、etendue、时间结构等关键指标上的对比，以及高辐射工况下的能量平衡与 MHD 稳定性约束。</p>
+                <p><strong>主要结论：</strong>托卡马克等离子体层等效 CE 中值约为 0.5%，较 LPP 光源低约一个数量级，且 etendue 失配显著；引入 Sn/Xe 高 Z 杂质后运行窗口较窄，与 EUV 光学系统在洁净度和重复频率等方面存在工程兼容性挑战。该研究认为，在当前技术条件下托卡马克尚难以替代 LPP 成为工业级 EUV 光刻光源，但作为高 Z 杂质辐射物理的研究平台仍具科学价值。</p>
+            </div>
+        </details>
     </section>
 
     <hr class="divider">
@@ -109,16 +82,16 @@
     <section id="home-posts">
         <h2>最新文章</h2>
         <div id="home-posts-list"></div>
-        <p style="margin-top: 12px; font-size: 14px;"><a href="blog.html">&#x1f4dd; 查看全部文章 &#x2192;</a></p>
+        <p style="margin-top: 12px; font-size: 14px;"><a href="blog.html">更多文章 →</a></p>
     </section>
 
     <hr class="divider">
 
     <section>
-        <h2>联系我</h2>
+        <h2>联系</h2>
         <p>
-            <a href="https://github.com/ljingchen77-rgb">GitHub</a> &#x00b7;
-            <a id="email-link">Email</a>
+            <a href="https://github.com/ljingchen77-rgb">GitHub</a> ·
+            <a href="#" id="email-link">Email</a>
         </p>
     </section>
 
@@ -128,8 +101,11 @@
 
 </div>
 
-<script>fetch("posts/posts.json").then(function(r){return r.json()}).then(function(p){var c=document.getElementById("home-posts-list");if(!c)return;for(var i=0;i<Math.min(3,p.length);i++){var x=p[i];var d=document.createElement("div");d.className="post-item";d.innerHTML="<h3><a href=\'blog.html?post="+encodeURIComponent(x.file)+"\'>"+x.title+"</a></h3><div class=\'post-meta\'>"+x.date+" "+x.categories.map(function(c){return"<span class=\'tag\'>"+c+"</span>"}).join("")+"</div><p class=\'post-summary\'>"+x.summary+"</p>";c.appendChild(d)}})</script>
+<script>
+fetch("posts/posts.json").then(function(r){return r.json()}).then(function(p){var c=document.getElementById("home-posts-list");if(!c)return;for(var i=0;i<Math.min(3,p.length);i++){var x=p[i];var d=document.createElement("div");d.className="post-item";d.innerHTML="<h3><a href=\'blog.html?post="+encodeURIComponent(x.file)+"\'>"+x.title+"</a></h3><div class=\'post-meta\'>"+x.date+" "+x.categories.map(function(c){return"<span class=\'tag\'>"+c+"</span>"}).join("")+"</div><p class=\'post-summary\'>"+x.summary+"</p>";c.appendChild(d)}});
+
+var u="jingchen0911",d="outlook.com",e=document.getElementById("email-link");if(e)e.href="mailto:"+u+"@"+d;
+</script>
 <script src="script.js"></script>
-<script>var u="jingchen0911",d="outlook.com",e=document.getElementById("email-link");if(e)e.href="mailto:"+u+"@"+d;</script>
 </body>
 </html>
