@@ -26,7 +26,7 @@ toggleBtn.addEventListener('click', () => {
 });
 
 // ===== 打字机效果（仅首次会话播放）=====
-const text = "核工程与核技术 \u00b7 托卡马克等离子体 EUV 辐射";
+const text = "核工程与核技术 \u00b7 核能科学与技术";
 const el = document.getElementById('home-tagline');
 
 if (!sessionStorage.getItem('tw_shown')) {
