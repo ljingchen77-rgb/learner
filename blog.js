@@ -9,7 +9,7 @@ const commentsContainer = document.getElementById('comments-container');
 const backBtn = document.getElementById('back-btn');
 
 fetch('posts/posts.json')
-    .then(r => r.json())
+    .then(r => { if (!r.ok) throw new Error('文章列表加载失败'); return r.json(); })
     .then(posts => {
         allPosts = posts;
         renderCategories();
@@ -17,7 +17,8 @@ fetch('posts/posts.json')
         const params = new URLSearchParams(window.location.search);
         const postFile = params.get('post');
         if (postFile) loadPost(postFile);
-    });
+    })
+    .catch(err => { itemsContainer.innerHTML = '<p style="color:#e74c3c">\u26a0 ' + err.message + '</p>'; });
 
 function renderCategories() {
     const cats = ['全部', ...new Set(allPosts.flatMap(p => p.categories))];
@@ -68,23 +69,35 @@ function loadPost(file) {
     window.scrollTo(0, 0);
 
     fetch(file)
-        .then(r => r.text())
+        .then(r => { if (!r.ok) throw new Error('文章加载失败'); return r.text(); })
         .then(md => {
             const title = md.split('\n')[0].replace(/^#\s*/, '');
             bodyContainer.innerHTML = marked.parse(md);
             document.title = title + ' · 刘靖臣';
             loadComments();
-        });
+        })
+        .catch(err => { bodyContainer.innerHTML = '<p style="color:#e74c3c">\u26a0 ' + err.message + '</p>'; });
 }
 
-backBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+function showListView() {
     contentView.classList.remove('active');
     listView.classList.remove('hidden');
     listView.classList.add('active');
     window.history.pushState({}, '', 'blog.html');
     document.title = '博客 · 刘靖臣';
     clearComments();
+}
+
+backBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    showListView();
+});
+
+window.addEventListener('popstate', () => {
+    const params = new URLSearchParams(window.location.search);
+    const postFile = params.get('post');
+    if (postFile) loadPost(postFile);
+    else showListView();
 });
 
 function loadComments() {

@@ -9,6 +9,7 @@ body {
     font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
     background: #f8f9fa;
     color: #333;
+    font-size: 16px;
     line-height: 1.9;
     min-height: 100vh;
     padding: 0;
@@ -79,6 +80,10 @@ body.dark-mode .nav-link:hover,
 body.dark-mode .nav-link.active {
     color: #74b9ff;
 }
+
+/* ===== 焦点样式 ===== */
+:focus-visible { outline: 2px solid #0984e3; outline-offset: 2px; }
+button:focus-visible, a:focus-visible { outline: 2px solid #0984e3; outline-offset: 2px; }
 
 /* ===== 导航栏 ===== */
 .navbar {
@@ -157,6 +162,12 @@ body.dark-mode .nav-brand {
     transition: background 0.3s, box-shadow 0.3s;
 }
 
+@media (max-width: 480px) {
+    .container { padding: 20px 16px; margin: 12px 8px; }
+    h1 { font-size: 22px; }
+    .avatar { width: 80px; height: 80px; font-size: 32px; }
+}
+
 @media (max-width: 600px) {
     .navbar-inner {
         padding: 0 16px;
@@ -166,6 +177,10 @@ body.dark-mode .nav-brand {
         margin: 16px 12px;
         border-radius: 10px;
     }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .container { padding: 40px 36px; }
 }
 
 /* ===== 头部 ===== */
@@ -250,7 +265,6 @@ section {
 /* ===== 段落 & 列表 ===== */
 p {
     margin-bottom: 10px;
-    font-size: 15px;
     line-height: 1.9;
 }
 
@@ -324,6 +338,8 @@ footer {
         font-size: 13px;
     }
 }
+
+#home-posts-list .post-item { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid #eaeaea; }
 
 /* ===== 博客列表 ===== */
 .post-item {
@@ -439,6 +455,10 @@ body.dark-mode .post-summary {
     overflow-x: auto;
     margin: 10px 0;
 }
+        body:not(.dark-mode) #post-body pre {
+            background: #f6f8fa;
+            color: #333;
+        }
 #post-body pre code { background: transparent; padding: 0; }
 #post-body blockquote {
     border-left: 3px solid #0984e3;

@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="刘靖臣 · 清华大学工程物理系 · 磁约束核聚变 · 托卡马克等离子体EUV辐射研究">
+    <meta property="og:title" content="刘靖臣 · 个人主页">
+    <meta property="og:description" content="清华大学工程物理系本科生，研究方向：磁约束核聚变、核工程与核技术">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <link rel="canonical" href="https://ljingchen77-rgb.github.io/learner/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🔬</text></svg>">
     <title>刘靖臣 · 主页</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,7 +21,7 @@
         <div class="nav-links">
             <a href="index.html" class="nav-link active">主页</a>
             <a href="blog.html" class="nav-link">博客</a>
-            <button id="dark-toggle">&#x1f319;</button>
+            <button id="dark-toggle" aria-label="切换暗色模式">&#x1f319;</button>
         </div>
     </div>
 </nav>
@@ -99,18 +106,9 @@
 
     <hr class="divider">
 
-    <section>
+    <section id="home-posts">
         <h2>最新文章</h2>
-        <div class="post-item">
-            <h3><a href="blog.html?post=posts/test.md">Test</a></h3>
-            <div class="post-meta">2026-06-28 <span class="tag">测试</span></div>
-            <p class="post-summary">一篇测试文章，验证 Markdown 博客系统正常工作。</p>
-        </div>
-        <div class="post-item">
-            <h3><a href="blog.html?post=posts/first-post.md">我的第一个个人网站上线了</a></h3>
-            <div class="post-meta">2026-06-28 <span class="tag">个人</span><span class="tag">教程</span></div>
-            <p class="post-summary">从零开始学习用 GitHub Pages 搭建个人网站，记录一下过程。</p>
-        </div>
+        <div id="home-posts-list"></div>
         <p style="margin-top: 12px; font-size: 14px;"><a href="blog.html">&#x1f4dd; 查看全部文章 &#x2192;</a></p>
     </section>
 
@@ -120,7 +118,7 @@
         <h2>联系我</h2>
         <p>
             <a href="https://github.com/ljingchen77-rgb">GitHub</a> &#x00b7;
-            <a href="mailto:jingchen0911@outlook.com">Email</a>
+            <a id="email-link">Email</a>
         </p>
     </section>
 
@@ -130,6 +128,8 @@
 
 </div>
 
+<script>fetch("posts/posts.json").then(function(r){return r.json()}).then(function(p){var c=document.getElementById("home-posts-list");if(!c)return;for(var i=0;i<Math.min(3,p.length);i++){var x=p[i];var d=document.createElement("div");d.className="post-item";d.innerHTML="<h3><a href=\'blog.html?post="+encodeURIComponent(x.file)+"\'>"+x.title+"</a></h3><div class=\'post-meta\'>"+x.date+" "+x.categories.map(function(c){return"<span class=\'tag\'>"+c+"</span>"}).join("")+"</div><p class=\'post-summary\'>"+x.summary+"</p>";c.appendChild(d)}})</script>
 <script src="script.js"></script>
+<script>var u="jingchen0911",d="outlook.com",e=document.getElementById("email-link");if(e)e.href="mailto:"+u+"@"+d;</script>
 </body>
 </html>
