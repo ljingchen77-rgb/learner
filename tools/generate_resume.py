@@ -93,7 +93,7 @@ def sidebar(c, lang):
 
 def metric(c, x, y, value, label):
     c.setFillColor(PALE); c.roundRect(x, y, 37 * mm, 20 * mm, 4 * mm, fill=1, stroke=0)
-    c.setFillColor(BLUE); c.setFont("YaHeiBold", 13); c.drawString(x + 4 * mm, y + 10 * mm, value)
+    para(c, value, x + 4 * mm, y + 16 * mm, 31 * mm, style(13, 16, BLUE, True))
     c.setFillColor(MUTED); c.setFont("YaHei", 6.5); c.drawString(x + 4 * mm, y + 5 * mm, label)
 
 
@@ -118,7 +118,7 @@ def main_content(c, lang):
     question = ("<b>核心问题：</b>托卡马克能否作为 13.5 nm 工业级极紫外光刻光源？" if lang == "zh" else "<b>Research question:</b> Can a tokamak serve as an industrial 13.5 nm EUV lithography source?")
     py = para(c, question, px, py, pw, style(7.8, 12, TEXT)) - 6 * mm
     mx = px
-    labels = [("≈ 0.5%", "等离子体层 CE 中值" if lang == "zh" else "Median plasma-level CE"), ("10⁻⁴—10⁻³", "系统层有效 CE" if lang == "zh" else "System-level CE"), ("≈ 10⁸×", "Etendue 失配" if lang == "zh" else "Etendue mismatch")]
+    labels = [("≈ 0.5%", "等离子体层 CE 中值" if lang == "zh" else "Median plasma-level CE"), ("10<super>-4</super>—10<super>-3</super>", "系统层有效 CE" if lang == "zh" else "System-level CE"), ("≈ 10<super>8</super>×", "Etendue 失配" if lang == "zh" else "Etendue mismatch")]
     for value, label in labels: metric(c, mx, py - 20 * mm, value, label); mx += 40 * mm
     py -= 28 * mm
     bullets = (["建立输入功率—总辐射—Sn/Xe 杂质辐射—13.5 nm 带内输出的分层转换效率模型。", "从参数匹配、能量效率、辐射亮度、MHD 稳定性与工程集成等维度对比托卡马克和 LPP 光源。", "结论表明托卡马克难以成为工业 EUV 光源，但可作为高 Z 杂质辐射与边缘输运研究平台。"] if lang == "zh" else ["Built a layered conversion-efficiency model from input power to total radiation, Sn/Xe impurity radiation, and 13.5 nm in-band output.", "Compared tokamak and LPP sources across parameter matching, efficiency, radiance, MHD stability, and engineering integration.", "Concluded that tokamaks are unlikely industrial EUV sources but remain valuable platforms for high-Z impurity and edge-transport research."])
