@@ -9,6 +9,7 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
     <link rel="canonical" href="https://ljingchen77-rgb.github.io/learner/blog/">
+    <link rel="alternate" type="application/rss+xml" title="刘靖臣的博客 RSS" href="../feed.xml">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🔬</text></svg>">
     <title>博客 · 刘靖臣</title>
     <link rel="stylesheet" href="../style.css">
@@ -37,13 +38,17 @@
     <hr class="divider">
 
     <div id="post-list">
+        <label class="search-box" for="post-search"><span aria-hidden="true">⌕</span><input id="post-search" type="search" placeholder="搜索文章、摘要或分类" autocomplete="off"></label>
         <div class="category-filter" id="category-filter"></div>
         <div id="post-items" class="post-grid"><p class="status-message">正在读取文章…</p></div>
     </div>
 
     <div id="post-content">
         <a href="#" class="back-link" id="back-btn">← 返回</a>
+        <div class="article-meta-bar" id="article-meta"></div>
+        <nav class="article-toc" id="article-toc" aria-label="文章目录"></nav>
         <div id="post-body"></div>
+        <nav class="post-navigation" id="post-navigation" aria-label="文章导航"></nav>
         <div class="comments-section">
             <h2>评论</h2>
             <div id="comments-container"></div>
@@ -51,7 +56,7 @@
     </div>
 
     <footer>
-        <span>&copy; 2026 刘靖臣</span><span>Field notes from a fusion explorer.</span>
+        <span>&copy; 2026 刘靖臣</span><span><a href="../feed.xml">RSS 订阅</a> · Field notes from a fusion explorer.</span>
     </footer>
 
 </div>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+  <title>刘靖臣的博客</title>
+  <link>https://ljingchen77-rgb.github.io/learner/blog/</link>
+  <description>关于核工程、聚变科学、技术实践与学习思考。</description>
+  <language>zh-CN</language>
+  <item><title>我的第一个个人网站上线了</title><link>https://ljingchen77-rgb.github.io/learner/blog/?post=posts%2Ffirst-post.md</link><guid>https://ljingchen77-rgb.github.io/learner/blog/?post=posts%2Ffirst-post.md</guid><pubDate>Sun, 28 Jun 2026 00:00:00 +0800</pubDate><description>从零开始学习用 GitHub Pages 搭建个人网站，记录一下过程。</description></item>
+  <item><title>Test</title><link>https://ljingchen77-rgb.github.io/learner/blog/?post=posts%2Ftest.md</link><guid>https://ljingchen77-rgb.github.io/learner/blog/?post=posts%2Ftest.md</guid><pubDate>Sun, 28 Jun 2026 00:00:00 +0800</pubDate><description>一篇测试文章，验证 Markdown 博客系统正常工作。</description></item>
+</channel>
+</rss>
