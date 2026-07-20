@@ -17,10 +17,10 @@
 
 <nav class="navbar">
     <div class="navbar-inner">
-        <a href="index.html" class="nav-brand">刘靖臣</a>
+        <a href="index.html" class="nav-brand"><span class="brand-mark">λ</span>刘靖臣</a>
         <div class="nav-links">
             <a href="index.html" class="nav-link active">主页</a>
-            <a href="blog.html" class="nav-link">博客</a>
+            <a href="blog/" class="nav-link">博客</a>
             <button id="dark-toggle" aria-label="切换暗色模式">🌙</button>
         </div>
     </div>
@@ -28,23 +28,33 @@
 
 <div class="main">
 
-    <div class="home-header">
-        <h1>刘靖臣</h1>
-        <p class="home-subtitle">清华大学 · 工程物理系 · 核工程与核技术</p>
-        <p class="home-tagline" id="home-tagline"></p>
+    <header class="hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Nuclear Engineering · Fusion Science</p>
+            <h1>刘靖臣<br><span class="hero-gradient">探索聚变，记录思考。</span></h1>
+            <p class="home-subtitle">清华大学工程物理系本科生，即将前往核工业西南物理研究院，在磁约束核聚变领域继续探索。</p>
+            <p class="home-tagline" id="home-tagline" aria-live="polite"></p>
+            <div class="hero-actions"><a class="button primary" href="#research">查看研究经历</a><a class="button" href="blog/">阅读博客 →</a></div>
+        </div>
+        <div class="atom" aria-hidden="true"><span class="atom-core"></span><span class="orbit"></span><span class="orbit"></span><span class="orbit"></span></div>
+    </header>
+
+    <div class="metrics" aria-label="个人概览">
+        <div class="metric"><strong>2022—2026</strong><span>清华大学 · 本科阶段</span></div>
+        <div class="metric"><strong>EUV</strong><span>托卡马克辐射研究</span></div>
+        <div class="metric"><strong>Fusion</strong><span>磁约束核聚变方向</span></div>
     </div>
 
-    <section>
-        <h2>关于</h2>
-        <p>
+    <hr class="divider">
+
+    <section class="about-grid">
+        <div class="info-card"><p class="eyebrow">About</p><h2>关于我</h2><p>
             本科就读于清华大学工程物理系，主修核工程与核技术。
             硕士阶段将前往核工业西南物理研究院，
             核能科学与技术方向，在磁约束核聚变领域深耕探索。
-        </p>
-    </section>
+        </p></div>
 
-    <section>
-        <h2>教育</h2>
+        <div class="info-card"><p class="eyebrow">Education</p><h2>教育经历</h2><div class="timeline">
         <div class="edu-item">
             <span class="edu-year">2022.9 – 2026.6</span>
             <strong>本科</strong> — 清华大学 · 工程物理系 · 核工程与核技术
@@ -53,12 +63,13 @@
             <span class="edu-year">即将</span>
             <strong>硕士</strong> — 核工业西南物理研究院 · 核能科学与技术
         </div>
+        </div></div>
     </section>
 
     <hr class="divider">
 
-        <section>
-        <h2>研究经历</h2>
+    <section id="research">
+        <p class="eyebrow">Research</p><h2>研究经历</h2>
         <div class="edu-item">
             <span class="edu-year">2025 – 2026</span>
             <strong>综合论文训练</strong> — 托卡马克等离子体 EUV 辐射的研究<br>
@@ -77,15 +88,14 @@
     <hr class="divider">
 
     <section id="home-posts">
-        <h2>最新文章</h2>
+        <div class="section-heading"><div><p class="eyebrow">Notes</p><h2>最新文章</h2></div><a href="blog/">查看全部 →</a></div>
         <div id="home-posts-list"></div>
-        <p style="margin-top: 12px; font-size: 14px;"><a href="blog.html">更多文章 →</a></p>
     </section>
 
     <hr class="divider">
 
     <section>
-        <h2>联系</h2>
+        <p class="eyebrow">Contact</p><h2>保持联系</h2>
         <p>
             <a href="https://github.com/ljingchen77-rgb">GitHub</a> ·
             <a href="#" id="email-link">Email</a>
@@ -93,13 +103,13 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 刘靖臣</p>
+        <span>&copy; 2026 刘靖臣</span><span>在探索与记录之间，保持好奇。</span>
     </footer>
 
 </div>
 
 <script>
-fetch("posts/posts.json").then(function(r){return r.json()}).then(function(p){var c=document.getElementById("home-posts-list");if(!c)return;for(var i=0;i<Math.min(3,p.length);i++){var x=p[i];var d=document.createElement("div");d.className="post-item";d.innerHTML="<h3><a href=\'blog.html?post="+encodeURIComponent(x.file)+"\'>"+x.title+"</a></h3><div class=\'post-meta\'>"+x.date+" "+x.categories.map(function(c){return"<span class=\'tag\'>"+c+"</span>"}).join("")+"</div><p class=\'post-summary\'>"+x.summary+"</p>";c.appendChild(d)}});
+fetch("blog/posts/posts.json").then(function(r){if(!r.ok)throw new Error();return r.json()}).then(function(posts){var root=document.getElementById("home-posts-list");if(!root)return;root.className="post-grid";posts.slice(0,3).forEach(function(post){var card=document.createElement("article"),meta=document.createElement("div"),h=document.createElement("h3"),a=document.createElement("a"),summary=document.createElement("p");card.className="post-item";meta.className="post-meta";meta.textContent=post.date;post.categories.forEach(function(cat){var tag=document.createElement("span");tag.className="tag";tag.textContent=cat;meta.append(" ",tag)});a.href="blog/?post="+encodeURIComponent(post.file);a.textContent=post.title;h.appendChild(a);summary.className="post-summary";summary.textContent=post.summary;card.append(meta,h,summary);root.appendChild(card)})}).catch(function(){var root=document.getElementById("home-posts-list");if(root)root.innerHTML='<p class="status-message">文章暂时未能加载，请稍后再试。</p>'});
 
 var u="jingchen0911",d="outlook.com",e=document.getElementById("email-link");if(e)e.href="mailto:"+u+"@"+d;
 </script>

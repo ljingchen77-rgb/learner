@@ -8,6 +8,8 @@ if (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: 
     toggleBtn.textContent = '\u2600\ufe0f';
 }
 
+toggleBtn.setAttribute('aria-pressed', String(body.classList.contains('dark-mode')));
+
 // 检查浏览器是否保存过主题偏好
 if (localStorage.getItem('theme') === 'dark') {
     body.classList.add('dark-mode');
@@ -23,13 +25,14 @@ toggleBtn.addEventListener('click', () => {
         localStorage.setItem('theme', 'light');
         toggleBtn.textContent = '\U0001F319';
     }
+    toggleBtn.setAttribute('aria-pressed', String(body.classList.contains('dark-mode')));
 });
 
 // ===== 打字机效果（仅首次会话播放）=====
 const text = "核工程与核技术 \u00b7 核能科学与技术";
 const el = document.getElementById('home-tagline');
 
-if (!sessionStorage.getItem('tw_shown')) {
+if (el && !sessionStorage.getItem('tw_shown') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let i = 0;
     function typeWriter() {
         if (i < text.length) {
@@ -40,6 +43,6 @@ if (!sessionStorage.getItem('tw_shown')) {
     }
     window.addEventListener('load', typeWriter);
     sessionStorage.setItem('tw_shown', 'true');
-} else {
+} else if (el) {
     el.textContent = text;
 }
