@@ -13,7 +13,7 @@ from reportlab.platypus import Paragraph
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads(Path(__file__).with_name("academic_resume_data.json").read_text(encoding="utf-8"))
-OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v12.pdf"
+OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v13.pdf"
 
 pdfmetrics.registerFont(TTFont("YaHei", r"C:\Windows\Fonts\msyh.ttc", subfontIndex=0))
 pdfmetrics.registerFont(TTFont("YaHeiBold", r"C:\Windows\Fonts\msyhbd.ttc", subfontIndex=0))
@@ -172,15 +172,19 @@ for label, value in highlights:
 ry -= 41 * mm
 ry = section_title(c, "校园与社会经历", rx, ry, rw)
 activity_details = [
-    ("班级科研委员", "面向班级整理并传达 SRT、学科竞赛等科研实践信息。协助同学了解项目申报与参与渠道，承担日常沟通和组织协调工作。"),
-    ("学生工作", "曾参与系学生会、系团委及校团委1911星球相关工作。负责活动联络、信息沟通和现场协作，积累跨团队配合经验。"),
-    ("乡村振兴实践", "参与湖南湘乡乡村振兴工作站实践，了解基层项目运行，协助开展调研与实践活动。<br/><b><font color=\"#2563EB\">成果：获实践金奖</font></b>"),
-    ("志愿服务", "参加“音禾计划”听障儿童志愿服务，协助开展儿童陪伴与活动支持。<br/><b><font color=\"#2563EB\">成果：获评五星级志愿项目</font></b>"),
+    ("班级科研委员", "", "整理并传达 SRT、学科竞赛等科研实践信息，协助同学了解项目申报与参与渠道。"),
+    ("学生工作", "2023.02 - 2024.09", "先后参与系学生会、系团委及校团委1911星球工作，负责活动联络、信息沟通与现场协作。"),
+    ("乡村振兴实践", "2023.08", "参与湖南湘乡乡村振兴工作站调研与实践活动。<br/><b><font color=\"#2563EB\">成果：获实践金奖</font></b>"),
+    ("志愿服务", "2023 - 2024", "参加“音禾计划”听障儿童志愿服务，协助开展儿童陪伴与活动支持。<br/><b><font color=\"#2563EB\">成果：获评五星级志愿项目</font></b>"),
 ]
-for label, value in activity_details:
+for label, period, value in activity_details:
     c.setFillColor(BLUE)
     c.setFont("YaHeiBold", 7.5)
     c.drawString(mx, ry, label)
+    if period:
+        c.setFillColor(MUTED)
+        c.setFont("YaHei", 6.3)
+        c.drawRightString(rx + rw, ry, period)
     ry -= 4.2 * mm
     ry = para(c, value, mx, ry, mw, ps(7.3, 11.2)) - 3.4 * mm
 
