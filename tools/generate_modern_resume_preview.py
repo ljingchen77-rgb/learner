@@ -13,7 +13,7 @@ from reportlab.platypus import Paragraph
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads(Path(__file__).with_name("academic_resume_data.json").read_text(encoding="utf-8"))
-OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v3.pdf"
+OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v4.pdf"
 
 pdfmetrics.registerFont(TTFont("YaHei", r"C:\Windows\Fonts\msyh.ttc", subfontIndex=0))
 pdfmetrics.registerFont(TTFont("YaHeiBold", r"C:\Windows\Fonts\msyhbd.ttc", subfontIndex=0))
@@ -166,8 +166,9 @@ ry -= 41 * mm
 ry = section_title(c, "校园与社会经历", rx, ry, rw)
 activity_details = [
     ("班级科研委员", "面向班级整理并传达 SRT、学科竞赛等科研实践信息。协助同学了解项目申报与参与渠道，承担日常沟通和组织协调工作。"),
-    ("学生工作", "曾参与系学生会、系团委及校团委 1911 星球相关工作。负责活动联络、信息沟通和现场协作，积累跨团队配合经验。"),
-    ("社会实践", "参与湖南湘乡乡村振兴工作站实践，了解基层项目运行。参加“音禾计划”听障儿童志愿服务，协助开展陪伴与活动支持。"),
+    ("学生工作", "曾参与系学生会、系团委及校团委1911星球相关工作。负责活动联络、信息沟通和现场协作，积累跨团队配合经验。"),
+    ("乡村振兴实践", "参与湖南湘乡乡村振兴工作站实践，了解基层项目运行，协助开展调研与实践活动。"),
+    ("志愿服务", "参加“音禾计划”听障儿童志愿服务，协助开展儿童陪伴与活动支持。"),
 ]
 for label, value in activity_details:
     c.setFillColor(BLUE)
