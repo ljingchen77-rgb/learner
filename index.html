@@ -25,7 +25,7 @@
             <a href="index.html" class="nav-link active">主页</a>
             <a href="blog/" class="nav-link">博客</a>
             <a href="en/" class="nav-link" lang="en">EN</a>
-            <a href="assets/Liu-Jingchen-Academic-Resume-2026-v7.pdf" class="nav-link" download>简历</a>
+            <a href="assets/Liu-Jingchen-Academic-Resume-2026-v8.pdf" class="nav-link" download>简历</a>
             <button id="dark-toggle" aria-label="切换暗色模式">🌙</button>
         </div>
     </div>
@@ -39,7 +39,7 @@
             <h1>刘靖臣<br><span class="hero-gradient">探索聚变，记录思考。</span></h1>
             <p class="home-subtitle">清华大学工程物理系本科生，即将前往核工业西南物理研究院，在磁约束核聚变领域继续探索。</p>
             <p class="home-tagline" id="home-tagline" aria-live="polite"></p>
-            <div class="hero-actions"><a class="button primary" href="#research">查看研究经历</a><a class="button" href="assets/Liu-Jingchen-Academic-Resume-2026-v7.pdf" download>下载学术简历 ↓</a><a class="button" href="blog/">阅读博客 →</a></div>
+            <div class="hero-actions"><a class="button primary" href="#research">查看研究经历</a><a class="button" href="assets/Liu-Jingchen-Academic-Resume-2026-v8.pdf" download>下载学术简历 ↓</a><a class="button" href="blog/">阅读博客 →</a></div>
         </div>
         <div class="atom" aria-hidden="true"><span class="atom-core"></span><span class="orbit"></span><span class="orbit"></span><span class="orbit"></span></div>
     </header>
@@ -90,11 +90,11 @@
     <section id="research">
         <p class="eyebrow">Research</p><h2>研究经历</h2>
         <article class="research-card featured-research">
-            <div class="research-card-head"><div><span class="research-period">2026 · 独立研究尝试 · 受控合成数据</span><h3>机器学习模型为何难以跨托卡马克使用？</h3><p class="research-mentor">跨托卡马克破裂预测中的分布偏移诊断 · IEEE TPS 中英文论文工作稿</p></div><span class="research-badge">Paper Attempt</span></div>
-            <p class="research-question"><strong>研究问题</strong>：模型换到另一类托卡马克运行域后性能下降，究竟来自测量数据不同，还是破裂规律本身不同？</p>
+            <div class="research-card-head"><div><span class="research-period">2026 · 独立研究尝试 · 托卡马克破裂预测</span><h3>机器学习模型为何难以在不同托卡马克之间通用？</h3><p class="research-mentor">使用可控实验分析模型失效原因 · IEEE TPS 中英文论文初稿</p></div><span class="research-badge">Paper Attempt</span></div>
+            <p class="research-question"><strong>研究问题</strong>：模型换到另一台托卡马克后效果变差，究竟是设备与测量方式不同，还是破裂规律本身不同？</p>
             <div class="research-tags"><span>聚变破裂预测</span><span>机器学习</span><span>域迁移</span><span>Python</span><span>可复现研究</span></div>
             <div class="research-results"><div><strong>30 组</strong><span>独立重复实验</span></div><div><strong>500 炮/域</strong><span>每组受控合成样本</span></div><div><strong>2 类原因</strong><span>数据差异与规律变化</span></div></div>
-            <div class="research-overview"><div><span class="overview-number">01</span><p><strong>设计对照</strong><br>固定观测、噪声和放电划分，只改变潜在风险机制，避免把相关性直接当成原因。</p></div><div><span class="overview-number">02</span><p><strong>运行实验</strong><br>比较均值-方差对齐、CORAL、特征删除等方法，并使用放电级无泄漏划分。</p></div><div><span class="overview-number">03</span><p><strong>检验边界</strong><br>完成统计区间、参数扫描及分类器敏感性检查，并建立代码-结果-论文映射。</p></div></div>
+            <div class="research-overview"><div><span class="overview-number">01</span><p><strong>拆分原因</strong><br>分别模拟“测量数据变了”和“破裂规律变了”，观察两种情况对模型的影响。</p></div><div><span class="overview-number">02</span><p><strong>重复比较</strong><br>使用 Python 完成 30 组重复实验，比较多种数据处理方法能否恢复模型效果。</p></div><div><span class="overview-number">03</span><p><strong>明确边界</strong><br>整理代码、分析结果与论文初稿，结论仍需使用真实多装置数据验证。</p></div></div>
         </article>
 
         <article class="research-card practice-card">
