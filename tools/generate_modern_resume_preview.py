@@ -142,7 +142,7 @@ ry -= 4 * mm
 t = DATA["thesis"]
 c.setFillColor(BLUE)
 c.setFont("YaHeiBold", 6.5)
-c.drawString(mx, ry, f'{t["period"]} · 物理建模训练')
+c.drawString(mx, ry, f'{t["period"]} · 本科论文训练')
 ry -= 6 * mm
 ry = para(c, t["title"], mx, ry, mw, ps(9.5, 13, INK, True)) - 2.5 * mm
 ry = para(c, t["summary"], mx, ry, mw, ps(7.3, 11)) - 7 * mm
@@ -174,7 +174,7 @@ ry = section_title(c, "校园与社会经历", rx, ry, rw)
 activity_details = [
     ("校园工作", "", "担任班级科研委员，整理科研实践信息并协助项目申报。2023.02 - 2024.02 参与系学生会、系团委，2023.09 - 2024.09 参与校团委1911星球，负责活动联络与现场协作。"),
     ("乡村振兴实践", "2023.08", "参与湖南湘乡乡村振兴工作站调研与实践活动。<br/><b><font color=\"#2563EB\">成果：获实践金奖</font></b>"),
-    ("志愿服务", "2023 - 2024", "参加“音禾计划”听障儿童志愿服务，协助开展儿童陪伴与活动支持。<br/><b><font color=\"#2563EB\">成果：获评五星级志愿项目</font></b>"),
+    ("志愿服务", "2023 - 2024", "负责“音禾计划”听障儿童志愿服务，组织开展儿童陪伴与活动支持。<br/><b><font color=\"#2563EB\">成果：获评五星级志愿项目</font></b>"),
 ]
 for label, period, value in activity_details:
     c.setFillColor(BLUE)
