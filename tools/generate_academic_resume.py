@@ -1,5 +1,6 @@
-"""Generate a one-page Chinese academic resume for supervisor outreach."""
+"""Generate a polished one-page Chinese academic CV for supervisor outreach."""
 from pathlib import Path
+
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
@@ -9,62 +10,193 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph
 
+
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-CN.pdf"
 pdfmetrics.registerFont(TTFont("YaHei", r"C:\Windows\Fonts\msyh.ttc", subfontIndex=0))
 pdfmetrics.registerFont(TTFont("YaHeiBold", r"C:\Windows\Fonts\msyhbd.ttc", subfontIndex=0))
+
 W, H = A4
-NAVY, BLUE, VIOLET, CYAN = map(colors.HexColor, ["#101828", "#1368E8", "#7546E8", "#16B8C8"])
-TEXT, MUTED, PALE, LINE = map(colors.HexColor, ["#172033", "#667085", "#F4F7FC", "#DCE4F0"])
+NAVY = colors.HexColor("#0B1630")
+BLUE = colors.HexColor("#1769E0")
+VIOLET = colors.HexColor("#7357E8")
+CYAN = colors.HexColor("#21BED0")
+TEXT = colors.HexColor("#172033")
+MUTED = colors.HexColor("#667085")
+PALE = colors.HexColor("#F3F6FB")
+LINE = colors.HexColor("#DDE5F0")
 
-def st(size=8.4, leading=13, color=TEXT, bold=False):
-    return ParagraphStyle("a", fontName="YaHeiBold" if bold else "YaHei", fontSize=size, leading=leading, textColor=color)
 
-def para(c, text, x, top, width, style):
-    p = Paragraph(text, style); _, h = p.wrap(width, H); p.drawOn(c, x, top-h); return top-h
+def style(size=8.2, leading=12.5, color=TEXT, bold=False, align=0):
+    return ParagraphStyle(
+        "cv", fontName="YaHeiBold" if bold else "YaHei", fontSize=size,
+        leading=leading, textColor=color, alignment=align,
+    )
 
-def heading(c, text, x, y, width):
-    c.setFillColor(BLUE); c.setFont("YaHeiBold", 10); c.drawString(x, y, text)
-    c.setStrokeColor(LINE); c.line(x, y-2.4*mm, x+width, y-2.4*mm); return y-7*mm
 
-c = canvas.Canvas(str(OUTPUT), pagesize=A4); c.setTitle("刘靖臣 - 学术简历"); c.setAuthor("刘靖臣")
-c.setFillColor(colors.white); c.rect(0,0,W,H,fill=1,stroke=0)
-c.setFillColor(NAVY); c.rect(0,H-48*mm,W,48*mm,fill=1,stroke=0)
-c.setFillColor(VIOLET); c.circle(-6*mm,H+1*mm,27*mm,fill=1,stroke=0)
-c.setFillColor(BLUE); c.circle(W-3*mm,H-5*mm,24*mm,fill=1,stroke=0)
-c.setFillColor(CYAN); c.circle(W-34*mm,H+3*mm,11*mm,fill=1,stroke=0)
-x=16*mm
-c.setFillColor(colors.white); c.setFont("YaHeiBold",25); c.drawString(x,H-19*mm,"刘靖臣")
-c.setFillColor(colors.HexColor("#C6D4E8")); c.setFont("YaHei",8.5)
-c.drawString(x,H-28*mm,"清华大学工程物理系 · 核工程与核技术")
-c.drawString(x,H-35*mm,"拟研究方向：磁约束核聚变 · 托卡马克边缘与偏滤器物理")
-cx=116*mm; c.setFillColor(colors.HexColor("#D9E4F2")); c.setFont("YaHei",7)
-c.drawString(cx,H-19*mm,"邮箱  jingchen0911@outlook.com"); c.drawString(cx,H-26*mm,"主页  ljingchen77-rgb.github.io/learner/"); c.drawString(cx,H-33*mm,"GitHub  github.com/ljingchen77-rgb")
-c.setFillColor(CYAN); c.roundRect(cx,H-43*mm,58*mm,6.5*mm,3.25*mm,fill=1,stroke=0)
-c.setFillColor(NAVY); c.setFont("YaHeiBold",6.8); c.drawCentredString(cx+29*mm,H-40.8*mm,"2026 年本科毕业 · 即将攻读硕士")
-x,width,y=16*mm,W-32*mm,H-58*mm
-y=heading(c,"个人概况",x,y,width)
-y=para(c,"清华大学工程物理系核工程与核技术专业本科生，即将前往核工业西南物理研究院攻读核能科学与技术方向硕士。希望继续学习磁约束核聚变、托卡马克边缘等离子体、偏滤器与等离子体材料相关问题。具备文献调研、数量级估算、物理建模和技术报告写作经验。",x,y,width,st())-4*mm
-y=heading(c,"教育背景与研究兴趣",x,y,width)
-y=para(c,"<b>清华大学 · 工程物理系</b>　核工程与核技术本科　2022.09 - 2026.06<br/><b>核工业西南物理研究院</b>　核能科学与技术硕士（即将入学）<br/><font color='#1368E8'>磁约束核聚变 · 托卡马克 · 偏滤器物理 · 高 Z 杂质输运 · 等离子体材料</font>",x,y,width,st(8.2,14))-4*mm
-y=heading(c,"研究经历",x,y,width)
-card_h=88*mm; c.setFillColor(PALE); c.roundRect(x,y-card_h,width,card_h,4*mm,fill=1,stroke=0)
-c.setFillColor(VIOLET); c.roundRect(x,y-card_h,2.7*mm,card_h,1.35*mm,fill=1,stroke=0)
-px,py,pw=x+7*mm,y-8*mm,width-14*mm
-c.setFillColor(BLUE); c.setFont("YaHeiBold",7); c.drawString(px,py,"2025 - 2026 · 本科综合论文训练"); py-=7*mm
-py=para(c,"托卡马克等离子体 EUV 辐射的研究",px,py,pw,st(13,18,TEXT,True))-1*mm
-py=para(c,"指导教师：谭熠 副教授 · 清华大学工程物理系",px,py,pw,st(7,11,MUTED))-4*mm
-items=["围绕托卡马克能否作为 13.5 nm EUV 光刻光源开展系统可行性评估，独立完成相关文献梳理、指标归纳与论文写作。","建立输入功率、总辐射、Sn/Xe 杂质辐射与 13.5 nm 带内输出之间的分层转换效率模型。","对比托卡马克边缘及偏滤器参数与 Sn/Xe 最优辐射窗口，分析能量效率、辐射亮度、MHD 稳定性和工程集成约束。","估算等离子体层 CE 中值约 0.5%，系统层有效 CE 约 10<super>-4</super> 至 10<super>-3</super>，并识别约 10<super>8</super> 倍的 etendue 失配。","形成能力：跨领域文献调研、数量级估算、物理建模、技术比较、论文与答辩材料撰写。"]
-for item in items: py=para(c,"<font color='#7546E8'>●</font>　"+item,px,py,pw,st(7.4,11.5))-1.5*mm
-y-=card_h+8*mm; y=heading(c,"相关实践",x,y,width)
-c.setFillColor(BLUE); c.setFont("YaHeiBold",7); c.drawString(x,y,"2025.06 - 2025.07")
-c.setFillColor(TEXT); c.setFont("YaHeiBold",8.7); c.drawString(x+34*mm,y,"核工业西南物理研究院 · 材料研究所")
-y=para(c,"在导师指导下参与等离子体材料及钨铜合金模块在热负荷条件下的性能研究，了解面向等离子体材料研究的基本问题与科研工作流程，并进一步明确偏工程、实验方向的研究兴趣。",x+34*mm,y-6*mm,width-34*mm,st(7.7,12))-7*mm
-y=heading(c,"专业能力",x,y,width)
-skills=[("研究方法","文献检索与阅读、数量级估算、功率平衡与转换效率分析、跨方案技术比较"),("工具","Python 数据处理与可视化、MATLAB 数值计算与数据分析"),("专业基础","托卡马克、偏滤器、高 Z 杂质辐射、EUV、等离子体材料"),("表达","中文技术报告、学术论文写作、答辩展示与英文文献阅读")]
-for label,value in skills:
-    c.setFillColor(BLUE); c.setFont("YaHeiBold",7.2); c.drawString(x,y,label)
-    y=para(c,value,x+22*mm,y+1.5*mm,width-22*mm,st(7.4,11.5))-2.5*mm
-c.setStrokeColor(LINE); c.line(x,11*mm,x+width,11*mm); c.setFillColor(MUTED); c.setFont("YaHei",6)
-c.drawString(x,7*mm,"学术联系简历 · Curriculum Vitae"); c.drawRightString(x+width,7*mm,"2026 · 刘靖臣")
-c.save(); print(OUTPUT)
+def paragraph(pdf, text, x, top, width, pstyle):
+    block = Paragraph(text, pstyle)
+    _, height = block.wrap(width, H)
+    block.drawOn(pdf, x, top - height)
+    return top - height
+
+
+def section(pdf, index, title, x, y, width):
+    pdf.setFillColor(BLUE)
+    pdf.roundRect(x, y - 0.8 * mm, 7 * mm, 5.2 * mm, 2.6 * mm, fill=1, stroke=0)
+    pdf.setFillColor(colors.white)
+    pdf.setFont("YaHeiBold", 6.8)
+    pdf.drawCentredString(x + 3.5 * mm, y + 0.5 * mm, index)
+    pdf.setFillColor(NAVY)
+    pdf.setFont("YaHeiBold", 10.5)
+    pdf.drawString(x + 10 * mm, y, title)
+    pdf.setStrokeColor(LINE)
+    pdf.line(x + 35 * mm, y + 1.2 * mm, x + width, y + 1.2 * mm)
+    return y - 7 * mm
+
+
+pdf = canvas.Canvas(str(OUTPUT), pagesize=A4)
+pdf.setTitle("刘靖臣 - 学术简历")
+pdf.setAuthor("刘靖臣")
+pdf.setFillColor(colors.white)
+pdf.rect(0, 0, W, H, fill=1, stroke=0)
+
+# Header
+pdf.setFillColor(NAVY)
+pdf.rect(0, H - 45 * mm, W, 45 * mm, fill=1, stroke=0)
+pdf.setFillColor(VIOLET)
+pdf.circle(-6 * mm, H + 1 * mm, 27 * mm, fill=1, stroke=0)
+pdf.setFillColor(BLUE)
+pdf.circle(W - 2 * mm, H - 4 * mm, 24 * mm, fill=1, stroke=0)
+pdf.setFillColor(CYAN)
+pdf.circle(W - 34 * mm, H + 4 * mm, 11 * mm, fill=1, stroke=0)
+
+x = 15 * mm
+pdf.setFillColor(colors.white)
+pdf.setFont("YaHeiBold", 25)
+pdf.drawString(x, H - 17 * mm, "刘靖臣")
+pdf.setFillColor(colors.HexColor("#D7E2F2"))
+pdf.setFont("YaHei", 8.4)
+pdf.drawString(x, H - 26 * mm, "清华大学工程物理系 · 核工程与核技术")
+pdf.setFillColor(CYAN)
+pdf.setFont("YaHeiBold", 8.2)
+pdf.drawString(x, H - 34 * mm, "研究定位  |  磁约束核聚变 · 托卡马克边缘与偏滤器物理")
+
+cx = 119 * mm
+pdf.setFillColor(colors.HexColor("#E2EAF5"))
+pdf.setFont("YaHei", 6.8)
+pdf.drawString(cx, H - 17 * mm, "邮箱  jingchen0911@outlook.com")
+pdf.drawString(cx, H - 24 * mm, "主页  ljingchen77-rgb.github.io/learner/")
+pdf.drawString(cx, H - 31 * mm, "GitHub  github.com/ljingchen77-rgb")
+pdf.setFillColor(CYAN)
+pdf.roundRect(cx, H - 41 * mm, 59 * mm, 6.5 * mm, 3.25 * mm, fill=1, stroke=0)
+pdf.setFillColor(NAVY)
+pdf.setFont("YaHeiBold", 6.8)
+pdf.drawCentredString(cx + 29.5 * mm, H - 38.8 * mm, "2026 本科毕业 · 即将攻读核能科学与技术硕士")
+
+# Research snapshot
+x, width, y = 15 * mm, W - 30 * mm, H - 53 * mm
+pdf.setFillColor(MUTED)
+pdf.setFont("YaHeiBold", 6.8)
+pdf.drawString(x, y, "RESEARCH SNAPSHOT  /  研究速览")
+y -= 4 * mm
+gap = 3 * mm
+card_w = (width - 3 * gap) / 4
+snapshots = [
+    ("13.5 nm", "目标 EUV 波段"),
+    ("约 0.5%", "等离子体层 CE 中值"),
+    ("10^-4 - 10^-3", "系统层有效 CE"),
+    ("约 10^8 倍", "识别 etendue 失配"),
+]
+for i, (value, label) in enumerate(snapshots):
+    sx = x + i * (card_w + gap)
+    pdf.setFillColor(PALE)
+    pdf.roundRect(sx, y - 15 * mm, card_w, 15 * mm, 3 * mm, fill=1, stroke=0)
+    pdf.setFillColor(BLUE if i < 2 else VIOLET)
+    pdf.setFont("YaHeiBold", 10.5 if i != 2 else 9.2)
+    pdf.drawString(sx + 4 * mm, y - 6 * mm, value)
+    pdf.setFillColor(MUTED)
+    pdf.setFont("YaHei", 6.5)
+    pdf.drawString(sx + 4 * mm, y - 11.5 * mm, label)
+y -= 23 * mm
+
+# Profile and education
+y = section(pdf, "01", "研究画像", x, y, width)
+y = paragraph(
+    pdf,
+    "以聚变等离子体与工程系统之间的耦合问题为兴趣核心。具备从跨领域文献中提取关键参数、建立数量级模型、比较技术路线并形成技术报告的完整训练；希望在硕士阶段继续深入托卡马克边缘等离子体、偏滤器及等离子体材料问题。",
+    x, y, width, style(8.1, 12.8),
+) - 4 * mm
+
+y = section(pdf, "02", "教育与研究方向", x, y, width)
+y = paragraph(
+    pdf,
+    "<b>清华大学 · 工程物理系</b>　核工程与核技术本科　2022.09 - 2026.06<br/>"
+    "<b>核工业西南物理研究院</b>　核能科学与技术硕士（即将入学）<br/>"
+    "<font color='#1769E0'>关键词　磁约束核聚变 / 托卡马克 / 偏滤器 / 高 Z 杂质输运 / 等离子体材料</font>",
+    x, y, width, style(8, 13),
+) - 4 * mm
+
+# Main research project
+y = section(pdf, "03", "代表性研究", x, y, width)
+card_h = 71 * mm
+pdf.setFillColor(PALE)
+pdf.roundRect(x, y - card_h, width, card_h, 4 * mm, fill=1, stroke=0)
+pdf.setFillColor(VIOLET)
+pdf.roundRect(x, y - card_h, 2.8 * mm, card_h, 1.4 * mm, fill=1, stroke=0)
+px, py, pw = x + 7 * mm, y - 7 * mm, width - 14 * mm
+pdf.setFillColor(BLUE)
+pdf.setFont("YaHeiBold", 6.8)
+pdf.drawString(px, py, "2025 - 2026  |  本科综合论文训练")
+py -= 6.5 * mm
+py = paragraph(pdf, "托卡马克等离子体 EUV 辐射研究", px, py, pw, style(12.5, 17, NAVY, True)) - 1 * mm
+py = paragraph(pdf, "指导教师：谭熠 副教授 · 清华大学工程物理系", px, py, pw, style(6.8, 10.5, MUTED)) - 3 * mm
+research_rows = [
+    ("研究问题", "托卡马克能否作为 13.5 nm EUV 光刻光源，并满足效率、亮度、稳定性与工程集成约束？"),
+    ("分析路径", "独立完成文献梳理与指标归纳；建立“输入功率 - 总辐射 - Sn/Xe 杂质辐射 - 带内输出”分层效率模型。"),
+    ("关键比较", "对比边缘与偏滤器参数下的 Sn/Xe 辐射窗口，综合分析辐射亮度、MHD 稳定性和工程集成。"),
+    ("核心结论", "估算等离子体层 CE 中值约 0.5%、系统层有效 CE 约 10^-4 - 10^-3，并识别 etendue 失配为核心瓶颈。"),
+]
+for label, body in research_rows:
+    pdf.setFillColor(VIOLET)
+    pdf.roundRect(px, py - 3.8 * mm, 18 * mm, 5.2 * mm, 2.6 * mm, fill=1, stroke=0)
+    pdf.setFillColor(colors.white)
+    pdf.setFont("YaHeiBold", 6.3)
+    pdf.drawCentredString(px + 9 * mm, py - 2.1 * mm, label)
+    py = paragraph(pdf, body, px + 22 * mm, py + 0.7 * mm, pw - 22 * mm, style(7.25, 11)) - 2.1 * mm
+y -= card_h + 7 * mm
+
+# Practice and skills
+y = section(pdf, "04", "科研实践", x, y, width)
+pdf.setFillColor(BLUE)
+pdf.setFont("YaHeiBold", 6.8)
+pdf.drawString(x, y, "2025.06 - 2025.07")
+pdf.setFillColor(NAVY)
+pdf.setFont("YaHeiBold", 8.5)
+pdf.drawString(x + 32 * mm, y, "核工业西南物理研究院 · 材料研究所")
+y = paragraph(
+    pdf,
+    "参与等离子体材料及钨铜合金模块热负荷性能研究，了解面向聚变装置材料问题的基本科研流程，进一步明确对实验与工程方向的研究兴趣。",
+    x + 32 * mm, y - 5.5 * mm, width - 32 * mm, style(7.4, 11.5),
+) - 5 * mm
+
+y = section(pdf, "05", "方法与工具", x, y, width)
+skills = [
+    ("研究", "文献检索与阅读 · 数量级估算 · 功率平衡与效率分析 · 技术路线比较"),
+    ("计算", "Python 数据处理与可视化 · MATLAB 数值计算与数据分析"),
+    ("表达", "中文技术报告与学术论文写作 · 答辩展示 · 英文文献阅读"),
+]
+for label, value in skills:
+    pdf.setFillColor(BLUE)
+    pdf.setFont("YaHeiBold", 7)
+    pdf.drawString(x, y, label)
+    y = paragraph(pdf, value, x + 18 * mm, y + 1.4 * mm, width - 18 * mm, style(7.25, 11)) - 2.1 * mm
+
+pdf.setStrokeColor(LINE)
+pdf.line(x, 10.5 * mm, x + width, 10.5 * mm)
+pdf.setFillColor(MUTED)
+pdf.setFont("YaHei", 5.8)
+pdf.drawString(x, 6.7 * mm, "Academic CV · Fusion & Plasma Research")
+pdf.drawRightString(x + width, 6.7 * mm, "2026 · 刘靖臣")
+pdf.save()
+print(OUTPUT)
