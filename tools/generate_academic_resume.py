@@ -103,10 +103,10 @@ y -= 4 * mm
 gap = 3 * mm
 card_w = (width - 3 * gap) / 4
 snapshots = [
-    ("13.5 nm", "目标 EUV 波段"),
-    ("约 0.5%", "等离子体层 CE 中值"),
-    ("10^-4 - 10^-3", "系统层有效 CE"),
-    ("约 10^8 倍", "识别 etendue 失配"),
+    ("30 x 500", "独立群体 × 每域放电"),
+    ("0.281 - 0.301", "共享机制 AUC 恢复"),
+    ("0.149 - 0.178", "机制变化导致恢复损失"),
+    ("95% CI", "配对统计与稳健性检验"),
 ]
 for i, (value, label) in enumerate(snapshots):
     sx = x + i * (card_w + gap)
@@ -139,23 +139,23 @@ y = paragraph(
 
 # Main research project
 y = section(pdf, "03", "代表性研究", x, y, width)
-card_h = 59 * mm
+card_h = 69 * mm
 pdf.setFillColor(PALE)
 pdf.roundRect(x, y - card_h, width, card_h, 4 * mm, fill=1, stroke=0)
-pdf.setFillColor(VIOLET)
+pdf.setFillColor(CYAN)
 pdf.roundRect(x, y - card_h, 2.8 * mm, card_h, 1.4 * mm, fill=1, stroke=0)
 px, py, pw = x + 7 * mm, y - 7 * mm, width - 14 * mm
 pdf.setFillColor(BLUE)
 pdf.setFont("YaHeiBold", 6.8)
-pdf.drawString(px, py, "2025 - 2026  |  本科综合论文训练")
+pdf.drawString(px, py, "2026  |  独立研究尝试 · 受控合成数据 · IEEE TPS 论文工作稿")
 py -= 6.5 * mm
-py = paragraph(pdf, "托卡马克等离子体 EUV 辐射研究", px, py, pw, style(12.5, 17, NAVY, True)) - 1 * mm
-py = paragraph(pdf, "指导教师：谭熠 副教授 · 清华大学工程物理系", px, py, pw, style(6.8, 10.5, MUTED)) - 3 * mm
+py = paragraph(pdf, "跨托卡马克破裂预测中的分布偏移诊断", px, py, pw, style(12.5, 17, NAVY, True)) - 1 * mm
+py = paragraph(pdf, "研究目标：解释特征对齐何时有效，以及潜在风险机制变化为何限制跨域恢复", px, py, pw, style(6.8, 10.5, MUTED)) - 3 * mm
 research_rows = [
-    ("研究问题", "托卡马克能否作为 13.5 nm EUV 光刻光源，并满足效率、亮度、稳定性与工程集成约束？"),
-    ("分析路径", "独立完成文献梳理与指标归纳；建立“输入功率 - 总辐射 - Sn/Xe 杂质辐射 - 带内输出”分层效率模型。"),
-    ("关键比较", "比较边缘与偏滤器参数下的 Sn/Xe 辐射窗口，并综合考虑辐射亮度、MHD 稳定性和工程集成。"),
-    ("核心结论", "估算等离子体层 CE 中值约 0.5%、系统层有效 CE 约 10^-4 - 10^-3，识别 etendue 失配瓶颈。"),
+    ("受控设计", "固定观测、噪声与放电划分，仅改变潜在风险机制；构造共享机制与机制变化的成对实验。"),
+    ("分析方法", "使用 Wasserstein-1、特征删除、均值-方差对齐与 CORAL；采用放电级无泄漏划分。"),
+    ("主要结果", "30 个独立群体、每域 500 炮下，共享机制时恢复 0.281-0.301 AUC；机制变化时明显受限。"),
+    ("稳健审计", "以独立校准集、参数扫描、分类器与阈值敏感性检验边界；完成代码-结果-论文映射。"),
 ]
 for label, body in research_rows:
     pdf.setFillColor(VIOLET)
@@ -166,27 +166,22 @@ for label, body in research_rows:
     py = paragraph(pdf, body, px + 22 * mm, py + 0.7 * mm, pw - 22 * mm, style(7.25, 11)) - 2.1 * mm
 y -= card_h + 5 * mm
 
-# Independent paper attempt
-paper_h = 39 * mm
+# Undergraduate thesis - concise supporting project
+paper_h = 28 * mm
 pdf.setFillColor(colors.white)
 pdf.setStrokeColor(LINE)
 pdf.roundRect(x, y - paper_h, width, paper_h, 4 * mm, fill=1, stroke=1)
-pdf.setFillColor(CYAN)
+pdf.setFillColor(VIOLET)
 pdf.roundRect(x, y - paper_h, 2.8 * mm, paper_h, 1.4 * mm, fill=1, stroke=0)
 px, py, pw = x + 7 * mm, y - 6.5 * mm, width - 14 * mm
 pdf.setFillColor(BLUE)
 pdf.setFont("YaHeiBold", 6.6)
-pdf.drawString(px, py, "2026  |  独立研究尝试 · 受控合成数据 · 论文工作稿")
+pdf.drawString(px, py, "2025 - 2026  |  本科综合论文训练")
 py -= 6 * mm
-py = paragraph(pdf, "跨托卡马克破裂预测中的分布偏移诊断", px, py, pw, style(10.2, 14, NAVY, True)) - 1.5 * mm
+py = paragraph(pdf, "托卡马克等离子体 EUV 辐射研究", px, py, pw, style(10.2, 14, NAVY, True)) - 1.5 * mm
 py = paragraph(
     pdf,
-    "<b>问题与方法</b>　研究机器学习破裂预测模型跨运行域迁移时的性能下降；构建受控合成场景，结合 Wasserstein-1、特征删除、均值-方差对齐与 CORAL，区分观测偏移和潜在风险机制变化。",
-    px, py, pw, style(7.05, 10.6),
-) - 1.2 * mm
-paragraph(
-    pdf,
-    "<b>研究训练</b>　采用放电级无泄漏划分、多次随机重复及噪声/样本量/分类器敏感性检验；完成可复现实验代码、结果审计及 IEEE TPS 格式中英文工作稿。",
+    "围绕托卡马克作为 13.5 nm EUV 光源的可行性，完成文献梳理、数量级估算与分层效率模型；识别系统效率和 etendue 约束，并讨论其作为高 Z 杂质辐射研究平台的价值。",
     px, py, pw, style(7.05, 10.6),
 )
 y -= paper_h + 6 * mm
