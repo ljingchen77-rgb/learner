@@ -13,7 +13,7 @@ from reportlab.platypus import Paragraph
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads(Path(__file__).with_name("academic_resume_data.json").read_text(encoding="utf-8"))
-OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v13.pdf"
+OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v14.pdf"
 
 pdfmetrics.registerFont(TTFont("YaHei", r"C:\Windows\Fonts\msyh.ttc", subfontIndex=0))
 pdfmetrics.registerFont(TTFont("YaHeiBold", r"C:\Windows\Fonts\msyhbd.ttc", subfontIndex=0))
@@ -142,12 +142,12 @@ ry -= 4 * mm
 t = DATA["thesis"]
 c.setFillColor(BLUE)
 c.setFont("YaHeiBold", 6.5)
-c.drawString(mx, ry, f'{t["period"]} · 本科综合论文训练')
+c.drawString(mx, ry, f'{t["period"]} · 物理建模训练')
 ry -= 6 * mm
 ry = para(c, t["title"], mx, ry, mw, ps(9.5, 13, INK, True)) - 2.5 * mm
 ry = para(c, t["summary"], mx, ry, mw, ps(7.3, 11)) - 7 * mm
 
-ry = section_title(c, "生产实习", rx, ry, rw)
+ry = section_title(c, "聚变工程实践", rx, ry, rw)
 i = DATA["internship"]
 c.setFillColor(BLUE)
 c.setFont("YaHeiBold", 6.5)
@@ -172,8 +172,7 @@ for label, value in highlights:
 ry -= 41 * mm
 ry = section_title(c, "校园与社会经历", rx, ry, rw)
 activity_details = [
-    ("班级科研委员", "", "整理并传达 SRT、学科竞赛等科研实践信息，协助同学了解项目申报与参与渠道。"),
-    ("学生工作", "2023.02 - 2024.09", "先后参与系学生会、系团委及校团委1911星球工作，负责活动联络、信息沟通与现场协作。"),
+    ("校园工作", "", "担任班级科研委员，整理科研实践信息并协助项目申报。2023.02 - 2024.02 参与系学生会、系团委，2023.09 - 2024.09 参与校团委1911星球，负责活动联络与现场协作。"),
     ("乡村振兴实践", "2023.08", "参与湖南湘乡乡村振兴工作站调研与实践活动。<br/><b><font color=\"#2563EB\">成果：获实践金奖</font></b>"),
     ("志愿服务", "2023 - 2024", "参加“音禾计划”听障儿童志愿服务，协助开展儿童陪伴与活动支持。<br/><b><font color=\"#2563EB\">成果：获评五星级志愿项目</font></b>"),
 ]

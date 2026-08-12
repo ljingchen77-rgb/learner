@@ -6,7 +6,7 @@
     "email": "jingchen0911@outlook.com",
     "website": "ljingchen77-rgb.github.io/learner/",
     "github": "github.com/ljingchen77-rgb",
-    "focus": "研究兴趣：托卡马克边缘与偏滤器物理 · 数据分析与数值方法"
+    "focus": "研究兴趣：数字聚变堆 · AI+聚变 · 数据分析与物理建模"
   },
   "education": [
     {"period": "2022.09 - 2026.06", "school": "清华大学 · 工程物理系", "degree": "核工程与核技术本科"},
@@ -43,7 +43,7 @@
     {"period": "2023.08", "name": "湖南湘乡乡村振兴工作站"},
     {"period": "2023 - 2024", "name": "“音禾计划”志愿服务"}
   ],
-  "skills": ["Python：数据处理、机器学习实验与可视化", "MATLAB：基础数值计算与数据分析", "科研写作：LaTeX、文献检索与中英文技术稿整理", "实验认知：红外测温、吸收功率计算及材料表征流程"],
+  "skills": ["Python：数据处理、机器学习实验与可视化", "MATLAB：基础数值计算与物理建模", "研究训练：受控实验、重复比较与结果审计", "科研写作：LaTeX、文献检索与中英文技术稿整理"],
   "interests": [
     {"name": "篮球", "detail": "两次获“紫荆之巅”冠军"},
     {"name": "架子鼓", "detail": "八级"},
