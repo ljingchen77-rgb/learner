@@ -124,15 +124,13 @@ python -m http.server 8000
 - `en/index.html`：英文主页
 - `assets/Liu-Jingchen-Resume.pdf`：由网站内容生成的中英文简历
 - `tools/generate_resume.py`：简历 PDF 生成脚本
-- `assets/Liu-Jingchen-Academic-Resume-CN.pdf`：联系导师使用的一页中文学术简历
-- `assets/Liu-Jingchen-Resume-Modern-Preview.pdf`：网站当前提供下载的现代双栏学术简历
-- `assets/Liu-Jingchen-Academic-Resume-2026-v2.pdf`：避开浏览器 PDF 缓存的最新版公开下载文件
+- `assets/Liu-Jingchen-Academic-Resume-2026-v3.pdf`：网站当前提供下载的一页现代双栏中文学术简历
 - `tools/generate_academic_resume.py`：中文学术简历生成脚本
 - `tools/academic_resume_data.json`：中文学术简历的结构化内容数据，后续优先在此维护经历、课程和荣誉
 
 博客会自动提供文章搜索、分类筛选、阅读时间、正文目录及上一篇/下一篇导航。新增文章后，需要同步更新 `feed.xml`；如果新增独立页面，也需要将页面地址加入 `sitemap.xml`。
 
 首页经历或技能发生变化后，请同步修改 `tools/generate_resume.py` 中的简历内容，并运行该脚本重新生成 PDF。
-联系导师版简历的内容维护在 `tools/generate_academic_resume.py`，更新后需重新运行脚本生成 PDF。
+联系导师版简历的内容维护在 `tools/academic_resume_data.json`，更新后运行 `tools/generate_modern_resume_preview.py` 生成最新版 PDF。
 
 Markdown 渲染依赖 Marked.js，HTML 清理由 DOMPurify 完成，评论使用 Utterances。这些资源通过 CDN 加载，完全离线时不可用。
