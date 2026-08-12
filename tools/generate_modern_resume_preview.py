@@ -28,7 +28,7 @@ SIDE = colors.HexColor("#F0F4FA")
 LINE = colors.HexColor("#D9E1EC")
 
 
-def ps(size=7.4, leading=11, color=INK, bold=False):
+def ps(size=7.8, leading=11.6, color=INK, bold=False):
     return ParagraphStyle("p", fontName="YaHeiBold" if bold else "YaHei", fontSize=size, leading=leading, textColor=color)
 
 
@@ -43,7 +43,7 @@ def section_title(c, text, x, y, width, accent=BLUE):
     c.setFillColor(accent)
     c.rect(x, y - 1.2 * mm, 2.2 * mm, 6.2 * mm, fill=1, stroke=0)
     c.setFillColor(INK)
-    c.setFont("YaHeiBold", 10)
+    c.setFont("YaHeiBold", 10.5)
     c.drawString(x + 5 * mm, y, text)
     c.setStrokeColor(LINE)
     c.line(x + 32 * mm, y + 1.2 * mm, x + width, y + 1.2 * mm)
@@ -52,9 +52,9 @@ def section_title(c, text, x, y, width, accent=BLUE):
 
 def label_row(c, label, value, x, y, width):
     c.setFillColor(BLUE)
-    c.setFont("YaHeiBold", 6.5)
+    c.setFont("YaHeiBold", 7)
     c.drawString(x, y, label)
-    return para(c, value, x + 16 * mm, y + 1.2 * mm, width - 16 * mm, ps(6.8, 10)) - 1.5 * mm
+    return para(c, value, x + 17 * mm, y + 1.2 * mm, width - 17 * mm, ps(7.2, 10.8)) - 1.8 * mm
 
 
 c = canvas.Canvas(str(OUTPUT), pagesize=A4)
@@ -89,7 +89,7 @@ gap = 9 * mm
 left_w = 57 * mm
 right_x = margin + left_w + gap
 right_w = W - right_x - margin
-body_top = H - 46 * mm
+body_top = H - 44 * mm
 c.setFillColor(SIDE)
 c.roundRect(margin, 14 * mm, left_w, body_top - 14 * mm, 4 * mm, fill=1, stroke=0)
 
@@ -97,25 +97,27 @@ c.roundRect(margin, 14 * mm, left_w, body_top - 14 * mm, 4 * mm, fill=1, stroke=
 lx, ly, lw = margin + 6 * mm, body_top - 7 * mm, left_w - 12 * mm
 ly = section_title(c, "教育背景", lx, ly, lw, TEAL)
 for item in DATA["education"]:
-    ly = para(c, f'<b>{item["school"]}</b><br/>{item["degree"]}<br/><font color="#667085">{item["period"]}</font>', lx, ly, lw, ps(7.1, 10.8)) - 4 * mm
+    ly = para(c, f'<b>{item["school"]}</b><br/>{item["degree"]}<br/><font color="#667085">{item["period"]}</font>', lx, ly, lw, ps(7.5, 11.3)) - 4 * mm
+
+ly = para(c, f'<b><font color="#0891B2">绩点　{DATA["gpa"]}</font></b>', lx, ly, lw, ps(8, 11.5)) - 7 * mm
 
 ly = section_title(c, "相关课程", lx, ly, lw, TEAL)
 for item in DATA["courses"]:
-    ly = para(c, f'<font color="#0891B2">●</font>　{item}', lx, ly, lw, ps(6.8, 10)) - 1 * mm
+    ly = para(c, f'<font color="#0891B2">●</font>　{item}', lx, ly, lw, ps(7.2, 10.7)) - 1.2 * mm
 
 ly -= 6 * mm
 ly = section_title(c, "荣誉奖项", lx, ly, lw, TEAL)
 for item in DATA["honors"]:
-    ly = para(c, f'<font color="#0891B2">●</font>　{item}', lx, ly, lw, ps(6.8, 10)) - 1 * mm
+    ly = para(c, f'<font color="#0891B2">●</font>　{item}', lx, ly, lw, ps(7.2, 10.7)) - 1.2 * mm
 
 ly -= 6 * mm
 ly = section_title(c, "技能", lx, ly, lw, TEAL)
 for item in DATA["skills"]:
-    ly = para(c, item, lx, ly, lw, ps(6.7, 9.8)) - 1.2 * mm
+    ly = para(c, item, lx, ly, lw, ps(7.1, 10.5)) - 1.4 * mm
 
 ly -= 6 * mm
 ly = section_title(c, "兴趣爱好", lx, ly, lw, TEAL)
-para(c, " · ".join(DATA["interests"]), lx, ly, lw, ps(6.7, 10, TEAL, True))
+para(c, " · ".join(DATA["interests"]), lx, ly, lw, ps(7.1, 10.7, TEAL, True))
 
 # Main column
 rx, ry, rw = right_x, body_top - 7 * mm, right_w
@@ -125,7 +127,7 @@ c.setFillColor(BLUE)
 c.setFont("YaHeiBold", 6.5)
 c.drawString(rx, ry, f'{r["period"]} · {r["status"]}')
 ry -= 6 * mm
-ry = para(c, r["title"], rx, ry, rw, ps(11, 15, INK, True)) - 3 * mm
+ry = para(c, r["title"], rx, ry, rw, ps(11.5, 15.5, INK, True)) - 3.5 * mm
 for label, value in r["items"]:
     ry = label_row(c, label, value, rx, ry, rw)
 
@@ -135,8 +137,8 @@ c.setFillColor(BLUE)
 c.setFont("YaHeiBold", 6.5)
 c.drawString(rx, ry, f'{t["period"]} · 本科综合论文训练')
 ry -= 6 * mm
-ry = para(c, t["title"], rx, ry, rw, ps(9, 12.5, INK, True)) - 2 * mm
-ry = para(c, t["summary"], rx, ry, rw, ps(6.9, 10.3)) - 7 * mm
+ry = para(c, t["title"], rx, ry, rw, ps(9.5, 13, INK, True)) - 2.5 * mm
+ry = para(c, t["summary"], rx, ry, rw, ps(7.3, 11)) - 7 * mm
 
 ry = section_title(c, "生产实习", rx, ry, rw)
 i = DATA["internship"]
@@ -144,9 +146,9 @@ c.setFillColor(BLUE)
 c.setFont("YaHeiBold", 6.5)
 c.drawString(rx, ry, i["period"])
 ry -= 6 * mm
-ry = para(c, i["organization"], rx, ry, rw, ps(9.3, 12.5, INK, True)) - 1 * mm
-ry = para(c, f'指导教师：{i["mentor"]}', rx, ry, rw, ps(6.6, 9.5, MUTED)) - 3 * mm
-ry = para(c, i["summary"], rx, ry, rw, ps(7, 10.7)) - 5 * mm
+ry = para(c, i["organization"], rx, ry, rw, ps(9.7, 13, INK, True)) - 1.5 * mm
+ry = para(c, f'指导教师：{i["mentor"]}', rx, ry, rw, ps(7, 10, MUTED)) - 3.5 * mm
+ry = para(c, i["summary"], rx, ry, rw, ps(7.4, 11.3)) - 5 * mm
 
 # Readable internship highlights, separated from the paragraph.
 c.setFillColor(PALE)
@@ -160,15 +162,19 @@ highlights = [
 for label, value in highlights:
     hy = label_row(c, label, value, rx + 5 * mm, hy, rw - 10 * mm)
 
-ry -= 42 * mm
+ry -= 41 * mm
 ry = section_title(c, "校园与社会经历", rx, ry, rw)
 activity_details = [
-    ("班级科研委员", "组织和协助同学参与 SRT 及竞赛活动。"),
-    ("学生工作", "参与系学生会、系团委及校团委 1911 星球对外联络与活动协作。"),
-    ("社会实践", "参与湖南湘乡乡村振兴工作站及“音禾计划”听障儿童志愿服务。"),
+    ("班级科研委员", "面向班级整理并传达 SRT、学科竞赛等科研实践信息，协助同学了解项目申报与参与渠道，承担日常沟通和组织协调工作。"),
+    ("学生工作", "曾参与系学生会、系团委及校团委 1911 星球相关工作，负责活动联络、信息沟通和现场协作，积累跨团队配合经验。"),
+    ("社会实践", "参与湖南湘乡乡村振兴工作站实践，了解基层项目运行；参加“音禾计划”听障儿童志愿服务，协助开展陪伴与活动支持。"),
 ]
 for label, value in activity_details:
-    ry = label_row(c, label, value, rx, ry, rw)
+    c.setFillColor(BLUE)
+    c.setFont("YaHeiBold", 7.5)
+    c.drawString(rx, ry, label)
+    ry -= 4.2 * mm
+    ry = para(c, value, rx, ry, rw, ps(7.3, 11)) - 3 * mm
 
 c.setStrokeColor(LINE)
 c.line(margin, 9.5 * mm, W - margin, 9.5 * mm)
