@@ -13,7 +13,7 @@ from reportlab.platypus import Paragraph
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads(Path(__file__).with_name("academic_resume_data.json").read_text(encoding="utf-8"))
-OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v9.pdf"
+OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v10.pdf"
 
 pdfmetrics.registerFont(TTFont("YaHei", r"C:\Windows\Fonts\msyh.ttc", subfontIndex=0))
 pdfmetrics.registerFont(TTFont("YaHeiBold", r"C:\Windows\Fonts\msyhbd.ttc", subfontIndex=0))
@@ -51,10 +51,14 @@ def section_title(c, text, x, y, width, accent=BLUE):
 
 
 def label_row(c, label, value, x, y, width):
-    c.setFillColor(BLUE)
-    c.setFont("YaHeiBold", 7)
-    c.drawString(x, y, label)
-    return para(c, value, x + 17 * mm, y + 1.2 * mm, width - 17 * mm, ps(7.2, 10.8)) - 1.8 * mm
+    label_width = 17 * mm
+    label_p = Paragraph(label, ps(7.2, 10.8, BLUE, True))
+    value_p = Paragraph(value, ps(7.2, 10.8))
+    _, label_h = label_p.wrap(label_width, H)
+    _, value_h = value_p.wrap(width - label_width, H)
+    label_p.drawOn(c, x, y - label_h)
+    value_p.drawOn(c, x + label_width, y - value_h)
+    return y - max(label_h, value_h) - 1.8 * mm
 
 
 c = canvas.Canvas(str(OUTPUT), pagesize=A4)
