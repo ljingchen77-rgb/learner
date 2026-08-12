@@ -103,19 +103,18 @@ ly = section_title(c, "相关课程", lx, ly, lw, TEAL)
 for item in DATA["courses"]:
     ly = para(c, f'<font color="#0891B2">●</font>　{item}', lx, ly, lw, ps(6.8, 10)) - 1 * mm
 
-ly -= 3 * mm
+ly -= 6 * mm
 ly = section_title(c, "荣誉奖项", lx, ly, lw, TEAL)
 for item in DATA["honors"]:
     ly = para(c, f'<font color="#0891B2">●</font>　{item}', lx, ly, lw, ps(6.8, 10)) - 1 * mm
 
-ly -= 3 * mm
+ly -= 6 * mm
 ly = section_title(c, "技能", lx, ly, lw, TEAL)
 for item in DATA["skills"]:
     ly = para(c, item, lx, ly, lw, ps(6.7, 9.8)) - 1.2 * mm
 
-ly -= 3 * mm
-ly = section_title(c, "校园与兴趣", lx, ly, lw, TEAL)
-ly = para(c, " · ".join(DATA["activities"]), lx, ly, lw, ps(6.5, 9.7)) - 3 * mm
+ly -= 6 * mm
+ly = section_title(c, "兴趣爱好", lx, ly, lw, TEAL)
 para(c, " · ".join(DATA["interests"]), lx, ly, lw, ps(6.7, 10, TEAL, True))
 
 # Main column
@@ -160,6 +159,16 @@ highlights = [
 ]
 for label, value in highlights:
     hy = label_row(c, label, value, rx + 5 * mm, hy, rw - 10 * mm)
+
+ry -= 42 * mm
+ry = section_title(c, "校园与社会经历", rx, ry, rw)
+activity_details = [
+    ("班级科研委员", "组织和协助同学参与 SRT 及竞赛活动。"),
+    ("学生工作", "参与系学生会、系团委及校团委 1911 星球对外联络与活动协作。"),
+    ("社会实践", "参与湖南湘乡乡村振兴工作站及“音禾计划”听障儿童志愿服务。"),
+]
+for label, value in activity_details:
+    ry = label_row(c, label, value, rx, ry, rw)
 
 c.setStrokeColor(LINE)
 c.line(margin, 9.5 * mm, W - margin, 9.5 * mm)
