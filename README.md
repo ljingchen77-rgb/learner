@@ -126,6 +126,7 @@ python -m http.server 8000
 - `tools/generate_resume.py`：简历 PDF 生成脚本
 - `assets/Liu-Jingchen-Academic-Resume-CN.pdf`：联系导师使用的一页中文学术简历
 - `assets/Liu-Jingchen-Resume-Modern-Preview.pdf`：网站当前提供下载的现代双栏学术简历
+- `assets/Liu-Jingchen-Academic-Resume-2026-v2.pdf`：避开浏览器 PDF 缓存的最新版公开下载文件
 - `tools/generate_academic_resume.py`：中文学术简历生成脚本
 - `tools/academic_resume_data.json`：中文学术简历的结构化内容数据，后续优先在此维护经历、课程和荣誉
 
