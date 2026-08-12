@@ -13,7 +13,7 @@ from reportlab.platypus import Paragraph
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads(Path(__file__).with_name("academic_resume_data.json").read_text(encoding="utf-8"))
-OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v6.pdf"
+OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v7.pdf"
 
 pdfmetrics.registerFont(TTFont("YaHei", r"C:\Windows\Fonts\msyh.ttc", subfontIndex=0))
 pdfmetrics.registerFont(TTFont("YaHeiBold", r"C:\Windows\Fonts\msyhbd.ttc", subfontIndex=0))
@@ -105,19 +105,20 @@ ly = section_title(c, "相关课程", lx, ly, lw, TEAL)
 for item in DATA["courses"]:
     ly = para(c, f'<font color="#0891B2">●</font>　{item}', lx, ly, lw, ps(7.2, 10.7)) - 1.2 * mm
 
-ly -= 6 * mm
+ly -= 9 * mm
 ly = section_title(c, "荣誉奖项", lx, ly, lw, TEAL)
 for item in DATA["honors"]:
     ly = para(c, f'<font color="#0891B2">●</font>　{item}', lx, ly, lw, ps(7.2, 10.7)) - 1.2 * mm
 
-ly -= 6 * mm
+ly -= 9 * mm
 ly = section_title(c, "技能", lx, ly, lw, TEAL)
 for item in DATA["skills"]:
     ly = para(c, item, lx, ly, lw, ps(7.1, 10.5)) - 1.4 * mm
 
-ly -= 6 * mm
-ly = section_title(c, "兴趣爱好", lx, ly, lw, TEAL)
-para(c, " · ".join(DATA["interests"]), lx, ly, lw, ps(7.1, 10.7, TEAL, True))
+ly -= 9 * mm
+ly = section_title(c, "兴趣与特长", lx, ly, lw, TEAL)
+for item in DATA["interests"]:
+    ly = para(c, f'<b>{item["name"]}</b><br/><font color="#0891B2">{item["detail"]}</font>', lx, ly, lw, ps(7.4, 11)) - 3.2 * mm
 
 # Main column
 rx, ry, rw = right_x, body_top - 7 * mm, right_w
@@ -175,7 +176,7 @@ for label, value in activity_details:
     c.setFont("YaHeiBold", 7.5)
     c.drawString(rx, ry, label)
     ry -= 4.2 * mm
-    ry = para(c, value, rx, ry, rw, ps(7.3, 11)) - 3 * mm
+    ry = para(c, value, rx, ry, rw, ps(7.3, 11.2)) - 3.4 * mm
 
 c.setStrokeColor(LINE)
 c.line(margin, 9.5 * mm, W - margin, 9.5 * mm)
