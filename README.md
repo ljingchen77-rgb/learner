@@ -126,6 +126,7 @@ python -m http.server 8000
 - `tools/generate_resume.py`：简历 PDF 生成脚本
 - `assets/Liu-Jingchen-Academic-Resume-CN.pdf`：联系导师使用的一页中文学术简历
 - `tools/generate_academic_resume.py`：中文学术简历生成脚本
+- `tools/academic_resume_data.json`：中文学术简历的结构化内容数据，后续优先在此维护经历、课程和荣誉
 
 博客会自动提供文章搜索、分类筛选、阅读时间、正文目录及上一篇/下一篇导航。新增文章后，需要同步更新 `feed.xml`；如果新增独立页面，也需要将页面地址加入 `sitemap.xml`。
 
