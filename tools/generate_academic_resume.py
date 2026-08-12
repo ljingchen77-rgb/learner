@@ -139,7 +139,7 @@ y = paragraph(
 
 # Main research project
 y = section(pdf, "03", "代表性研究", x, y, width)
-card_h = 69 * mm
+card_h = 58 * mm
 pdf.setFillColor(PALE)
 pdf.roundRect(x, y - card_h, width, card_h, 4 * mm, fill=1, stroke=0)
 pdf.setFillColor(CYAN)
@@ -163,8 +163,8 @@ for label, body in research_rows:
     pdf.setFillColor(colors.white)
     pdf.setFont("YaHeiBold", 6.3)
     pdf.drawCentredString(px + 9 * mm, py - 2.1 * mm, label)
-    py = paragraph(pdf, body, px + 22 * mm, py + 0.7 * mm, pw - 22 * mm, style(7.25, 11)) - 2.1 * mm
-y -= card_h + 5 * mm
+    py = paragraph(pdf, body, px + 22 * mm, py + 0.7 * mm, pw - 22 * mm, style(7.05, 10.4)) - 1.5 * mm
+y -= card_h + 4 * mm
 
 # Undergraduate thesis - concise supporting project
 paper_h = 28 * mm
@@ -184,33 +184,35 @@ py = paragraph(
     "围绕托卡马克作为 13.5 nm EUV 光源的可行性，完成文献梳理、数量级估算与分层效率模型；识别系统效率和 etendue 约束，并讨论其作为高 Z 杂质辐射研究平台的价值。",
     px, py, pw, style(7.05, 10.6),
 )
-y -= paper_h + 6 * mm
+y -= paper_h + 4 * mm
 
 # Practice and skills
 y = section(pdf, "04", "科研实践", x, y, width)
 pdf.setFillColor(BLUE)
 pdf.setFont("YaHeiBold", 6.8)
-pdf.drawString(x, y, "2025.06 - 2025.07")
+pdf.drawString(x, y, "2025.06.23 - 2025.07.25")
 pdf.setFillColor(NAVY)
 pdf.setFont("YaHeiBold", 8.5)
-pdf.drawString(x + 32 * mm, y, "核工业西南物理研究院 · 材料研究所")
+pdf.drawString(x + 42 * mm, y, "核工业西南物理研究院 · 材料研究所（练有运老师指导）")
 y = paragraph(
     pdf,
-    "参与等离子体材料及钨铜合金模块热负荷性能研究，了解面向聚变装置材料问题的基本科研流程，进一步明确对实验与工程方向的研究兴趣。",
-    x + 32 * mm, y - 5.5 * mm, width - 32 * mm, style(7.4, 11.5),
-) - 5 * mm
+    "参与面向等离子体材料及 W/CuCrZr 水冷模块热负荷研究；学习 20 MW 电子束平台加载、红外测温、吸收功率计算及材料表征方法，结合 9/15 MW·m<super>-2</super> 循环工况分析连接界面、钨再结晶与表面损伤，并完成生产实习报告。",
+    x + 42 * mm, y - 5.5 * mm, width - 42 * mm, style(7.15, 10.8),
+) - 4 * mm
 
-y = section(pdf, "05", "方法与工具", x, y, width)
+y = section(pdf, "05", "课程、能力与经历", x, y, width)
 skills = [
-    ("研究", "文献检索与阅读 · 数量级估算 · 功率平衡与效率分析 · 技术路线比较"),
-    ("计算", "Python 数据处理与可视化 · MATLAB 数值计算与数据分析"),
-    ("表达", "中文技术报告与学术论文写作 · 答辩展示 · 英文文献阅读"),
+    ("课程", "计算机模拟物理 · 材料学导论 · 同位素分离原理 · 级联理论"),
+    ("能力", "Python 数据分析与可视化 · MATLAB 数值计算 · 文献调研 · 技术报告与论文写作"),
+    ("荣誉", "国防科技奖学金 · 志愿奖学金 · 社工奖学金"),
+    ("经历", "班级科研委员 · 系学生会/系团委 · 校团委 1911 星球 · 乡村振兴与“音禾计划”志愿服务"),
+    ("兴趣", "篮球 · 架子鼓八级 · 葫芦丝七级"),
 ]
 for label, value in skills:
     pdf.setFillColor(BLUE)
     pdf.setFont("YaHeiBold", 7)
     pdf.drawString(x, y, label)
-    y = paragraph(pdf, value, x + 18 * mm, y + 1.4 * mm, width - 18 * mm, style(7.25, 11)) - 2.1 * mm
+    y = paragraph(pdf, value, x + 18 * mm, y + 1.4 * mm, width - 18 * mm, style(7.05, 10.5)) - 1.6 * mm
 
 pdf.setStrokeColor(LINE)
 pdf.line(x, 10.5 * mm, x + width, 10.5 * mm)
