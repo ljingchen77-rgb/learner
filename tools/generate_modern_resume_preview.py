@@ -13,7 +13,7 @@ from reportlab.platypus import Paragraph
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads(Path(__file__).with_name("academic_resume_data.json").read_text(encoding="utf-8"))
-OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v8.pdf"
+OUTPUT = ROOT / "assets" / "Liu-Jingchen-Academic-Resume-2026-v9.pdf"
 
 pdfmetrics.registerFont(TTFont("YaHei", r"C:\Windows\Fonts\msyh.ttc", subfontIndex=0))
 pdfmetrics.registerFont(TTFont("YaHeiBold", r"C:\Windows\Fonts\msyhbd.ttc", subfontIndex=0))
@@ -122,34 +122,36 @@ for item in DATA["interests"]:
 
 # Main column
 rx, ry, rw = right_x, body_top - 7 * mm, right_w
+mx = rx + 5 * mm
+mw = rw - 5 * mm
 ry = section_title(c, "研究经历", rx, ry, rw)
 r = DATA["research"]
 c.setFillColor(BLUE)
 c.setFont("YaHeiBold", 6.5)
-c.drawString(rx, ry, f'{r["period"]} · {r["status"]}')
+c.drawString(mx, ry, f'{r["period"]} · {r["status"]}')
 ry -= 6 * mm
-ry = para(c, r["title"], rx, ry, rw, ps(11.5, 15.5, INK, True)) - 3.5 * mm
+ry = para(c, r["title"], mx, ry, mw, ps(11.5, 15.5, INK, True)) - 3.5 * mm
 for label, value in r["items"]:
-    ry = label_row(c, label, value, rx, ry, rw)
+    ry = label_row(c, label, value, mx, ry, mw)
 
 ry -= 4 * mm
 t = DATA["thesis"]
 c.setFillColor(BLUE)
 c.setFont("YaHeiBold", 6.5)
-c.drawString(rx, ry, f'{t["period"]} · 本科综合论文训练')
+c.drawString(mx, ry, f'{t["period"]} · 本科综合论文训练')
 ry -= 6 * mm
-ry = para(c, t["title"], rx, ry, rw, ps(9.5, 13, INK, True)) - 2.5 * mm
-ry = para(c, t["summary"], rx, ry, rw, ps(7.3, 11)) - 7 * mm
+ry = para(c, t["title"], mx, ry, mw, ps(9.5, 13, INK, True)) - 2.5 * mm
+ry = para(c, t["summary"], mx, ry, mw, ps(7.3, 11)) - 7 * mm
 
 ry = section_title(c, "生产实习", rx, ry, rw)
 i = DATA["internship"]
 c.setFillColor(BLUE)
 c.setFont("YaHeiBold", 6.5)
-c.drawString(rx, ry, i["period"])
+c.drawString(mx, ry, i["period"])
 ry -= 6 * mm
-ry = para(c, i["organization"], rx, ry, rw, ps(9.7, 13, INK, True)) - 1.5 * mm
-ry = para(c, f'指导教师：{i["mentor"]}', rx, ry, rw, ps(7, 10, MUTED)) - 3.5 * mm
-ry = para(c, i["summary"], rx, ry, rw, ps(7.4, 11.3)) - 5 * mm
+ry = para(c, i["organization"], mx, ry, mw, ps(9.7, 13, INK, True)) - 1.5 * mm
+ry = para(c, f'指导教师：{i["mentor"]}', mx, ry, mw, ps(7, 10, MUTED)) - 3.5 * mm
+ry = para(c, i["summary"], mx, ry, mw, ps(7.4, 11.3)) - 5 * mm
 
 # Readable internship highlights, separated from the paragraph.
 c.setFillColor(PALE)
@@ -174,9 +176,9 @@ activity_details = [
 for label, value in activity_details:
     c.setFillColor(BLUE)
     c.setFont("YaHeiBold", 7.5)
-    c.drawString(rx, ry, label)
+    c.drawString(mx, ry, label)
     ry -= 4.2 * mm
-    ry = para(c, value, rx, ry, rw, ps(7.3, 11.2)) - 3.4 * mm
+    ry = para(c, value, mx, ry, mw, ps(7.3, 11.2)) - 3.4 * mm
 
 c.setStrokeColor(LINE)
 c.line(margin, 9.5 * mm, W - margin, 9.5 * mm)
